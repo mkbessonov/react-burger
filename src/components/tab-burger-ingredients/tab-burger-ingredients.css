@@ -1,0 +1,6 @@
+.ingredients-block{
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 40px;
+    padding-top: 24px;
+}

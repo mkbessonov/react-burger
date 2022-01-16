@@ -1,0 +1,18 @@
+.card{
+    float:left;
+    max-width: 272px;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+.name-product{
+    text-align: center
+}
+.img-product{
+    padding-bottom: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.price{
+    display: flex;
+    justify-content: center;
+}

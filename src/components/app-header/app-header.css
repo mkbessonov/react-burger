@@ -1,0 +1,22 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    max-width: 50vw;
+    margin: auto;
+}
+
+.header-button {
+    display: flex;
+}
+
+.burger-button {
+
+}
+
+.header-button button {
+    padding-left: 0;
+    display: flex;
+}
+.header-button svg {
+    padding-right: 8px;
+}
