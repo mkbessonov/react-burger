@@ -1,5 +1,5 @@
 import React from "react";
-import {ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
+import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {connect} from "react-redux";
 import {ETypesIngredient, Ingredient} from "../../store/ingredients/types";
 import {deleteIngredient} from "../../store/ingredients/actions";
@@ -9,7 +9,7 @@ interface IBurgerConstructorProps {
     deleteIngredient: typeof deleteIngredient
 }
 
-export const BurgerConstructor = (props: IBurgerConstructorProps) => {
+const BurgerConstructor = (props: IBurgerConstructorProps) => {
     const {ingredients, deleteIngredient} = props;
     const isLocked = (elem: Ingredient) => {
         return elem.type === ETypesIngredient.BUN;
@@ -33,21 +33,25 @@ export const BurgerConstructor = (props: IBurgerConstructorProps) => {
         return elem.name;
     };
     return (
-        <div style={{height:'64vh', overflow: 'auto'}}>
-            <div style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
-            {ingredients.map(elem =>
-                <ConstructorElement
-                    key={elem.id}
-                    type={type(elem)}
-                    isLocked={isLocked(elem)}
-                    text={name(elem)}
-                    price={elem.price}
-                    thumbnail={elem.image}
-                    handleClose={() => {
-                        deleteIngredient(elem)
-                    }}
-                />
-            )}
+        <div style={{overflow: 'auto', marginBottom: 'auto'}}>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '10px', marginLeft: '16px', marginRight: '6px'}}>
+                {ingredients.map((elem, index) => (
+                        <div style={{display: "flex", alignItems: "center"}}>
+                            {index !== 0 && index !== ingredients.length-1 && <span style={{paddingRight: '13.5px'}}> <DragIcon type="primary"/></span>}
+                            <span style={(index === 0 || index === ingredients.length-1) ? {paddingLeft: '37.5px'} : {}}><ConstructorElement
+                                key={elem.id}
+                                type={type(elem)}
+                                isLocked={isLocked(elem)}
+                                text={name(elem)}
+                                price={elem.price}
+                                thumbnail={elem.image}
+                                handleClose={() => {
+                                    deleteIngredient(elem)
+                                }}
+                            /></span>
+                        </div>
+                    )
+                )}
             </div>
         </div>
     );

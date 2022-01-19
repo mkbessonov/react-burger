@@ -1,19 +1,19 @@
 import {BurgerIngredients} from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-import './main.css'
+import styles from './main.module.css'
 import PlaceAnOrder from "../place-an-order/place-an-order";
 
 export const Main = () => {
     return (
         <main>
-            <div className='main'>
-                <div className='left-panel'>
+            <div className={styles.main}>
+                <div className={styles.left_panel}>
                     <article>
                         <h2 className='text text_type_main-large'>Соберите бургер</h2>
                     </article>
                     <BurgerIngredients/>
                 </div>
-                <div className='right-panel'>
+                <div className={styles.right_panel}>
                     <BurgerConstructor/>
                     <PlaceAnOrder/>
                 </div>

@@ -3,13 +3,13 @@ import {Logo} from "@ya.praktikum/react-developer-burger-ui-components";
 import {BurgerConstructorButton} from "./buttons/burger-constructor/burger-constructor";
 import {Profile} from "./buttons/profile/profile";
 import {Orders} from "./buttons/orders/orders";
-import './app-header.css'
+import styles from './app-header.module.css'
 
 export const AppHeader = () => {
     return (
         <header>
             <nav>
-                <div className='header-button'><BurgerConstructorButton/></div>
+                <div className={styles.header_button}><BurgerConstructorButton/></div>
                 <Logo/>
                 <Orders/>
                 <Profile/>

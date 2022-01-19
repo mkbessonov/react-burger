@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import Card from "../card/card";
-import './tab-burger-ingredients.css'
+import styles from './tab-burger-ingredients.module.css'
 import {getIngredients} from "../../service/ingredients-service";
 import {Ingredient} from "../../store/ingredients/types";
 
@@ -33,16 +33,16 @@ export const TabBurgersIngredients = () => {
             </div>
             <div style={{overflow:"auto", maxHeight: '70vh', paddingTop: '40px'}}>
                 <h2 className='text text_type_main-medium'>Булки</h2>
-                <div className='ingredients-block'>
-                    {bulks.map((elem: Ingredient) => <Card key={elem._id} ingredient={elem}/>)}
+                <div className={styles.ingredients_block}>
+                    {bulks.map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
                 </div>
                 <h2 className='text text_type_main-medium'>Соусы</h2>
-                <div className='ingredients-block'>
-                    {sauce.map((elem: Ingredient) => <Card key={elem._id} ingredient={elem}/>)}
+                <div className={styles.ingredients_block}>
+                    {sauce.map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
                 </div>
                 <h2 className='text text_type_main-medium'>Начинки</h2>
-                <div className='ingredients-block'>
-                    {main.map((elem: Ingredient) => <Card key={elem._id} ingredient={elem}/>)}
+                <div className={styles.ingredients_block}>
+                    {main.map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
                 </div>
             </div>
         </div>

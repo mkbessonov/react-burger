@@ -1,13 +1,13 @@
 .card{
     float:left;
-    max-width: 272px;
-    padding-right: 16px;
+    width: 272px;
+    padding-right: 24px;
     padding-left: 16px;
 }
-.name-product{
-    text-align: center
+.name_product{
+    text-align: center;
 }
-.img-product{
+.img_product{
     padding-bottom: 4px;
     padding-left: 16px;
     padding-right: 16px;
@@ -15,4 +15,6 @@
 .price{
     display: flex;
     justify-content: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
