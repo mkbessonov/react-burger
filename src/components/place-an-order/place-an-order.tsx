@@ -2,7 +2,7 @@ import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-comp
 import {connect} from "react-redux";
 import {deleteIngredient} from "../../store/ingredients/actions";
 import {Ingredient} from "../../store/ingredients/types";
-import {useEffect, useState} from "react";
+import {useMemo, useState} from "react";
 import styles from './place-an-order.module.css'
 import {OrderDetails} from "../order-details/order-details";
 
@@ -12,16 +12,14 @@ interface IPlaceAnOrderProps {
 
 const PlaceAnOrder = (props: IPlaceAnOrderProps) => {
     const {ingredients} = props;
-    const [sum, setSum] = useState<number>(0);
     const [open, setOpen] = useState<boolean>(false);
-    useEffect(() => {
+    const sum = useMemo(() => {
         let newSum = 0;
         ingredients.forEach((elem) => {
             newSum = newSum + elem.price;
         });
-        setSum(newSum);
+        return newSum
     }, [ingredients]);
-
     if (ingredients.length > 0) {
         return (
             <div className={styles.footer}>
