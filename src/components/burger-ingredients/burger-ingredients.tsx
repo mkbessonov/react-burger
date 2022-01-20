@@ -1,35 +1,18 @@
-import React, {useEffect} from "react";
-import {getIngredients} from "../../service/ingredients-service";
+import React from "react";
 import {Ingredient} from "../../store/ingredients/types";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 import Card from "../card/card";
 
-export const BurgerIngredients = () => {
+interface IBurgerIngredientsProps {
+    buns: Ingredient[];
+    sauce: Ingredient[];
+    main: Ingredient[];
+}
+
+export const BurgerIngredients = (props: IBurgerIngredientsProps) => {
     const [currentTab, setCurrentTab] = React.useState('bun');
-    const [buns, setBuns] = React.useState([]);
-    const [sauce, setSauce] = React.useState([]);
-    const [main, setMain] = React.useState([]);
-    useEffect(() => {
-        getIngredients().then((result) => {
-            if (result.data.success) {
-                const data = result.data.data;
-                setBuns(data.filter((elem: Ingredient) => elem.type === 'bun'));
-                setSauce(data.filter((elem: Ingredient) => elem.type === 'sauce'));
-                setMain(data.filter((elem: Ingredient) => elem.type === 'main'));
-            } else {
-                alert('Неизвестная ошибка')
-            }
-        }).catch(error => {
-            if (error.response) {
-                alert(`Ошибка ${error.response.data} ${error.response.status} ${error.response.headers}`);
-            } else if (error.request) {
-                alert(`Ошибка ${error.request}`);
-            } else {
-                alert(`Ошибка ${error.message}`);
-            }
-        });
-    }, []);
+    const {buns, sauce, main} = props;
     return (
         <>
             <div className={styles.tab}>
