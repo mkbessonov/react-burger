@@ -23,19 +23,25 @@ const PlaceAnOrder = (props: IPlaceAnOrderProps) => {
     }, [ingredients]);
 
     if (ingredients.length > 0) {
-        return <div className={styles.footer}>
-            <div className={styles.sum}>
-                <p className="text text_type_digits-medium">{sum}</p>
-                <CurrencyIcon type="primary" />
+        return (
+            <div className={styles.footer}>
+                <div className={styles.sum}>
+                    <p className="text text_type_digits-medium">{sum}</p>
+                    <CurrencyIcon type="primary"/>
+                </div>
+                <Button type="primary" size="medium" onClick={() => {
+                    setOpen(true)
+                }}>
+                    Оформить заказ
+                </Button>
+                {open && <OrderDetails handleClose={() => {
+                    setOpen(false)
+                }}/>}
             </div>
-            <Button type="primary" size="medium" onClick={()=>{setOpen(true)}}>
-                Оформить заказ
-            </Button>
-            {open && <OrderDetails handleClose={()=>{setOpen(false)}}/>}
-        </div>
+        );
     }
     return null;
-}
+};
 
 const mapStateToProps = (state: IPlaceAnOrderProps) => ({
     ingredients: state.ingredients

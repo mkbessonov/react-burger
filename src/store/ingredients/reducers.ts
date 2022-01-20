@@ -5,7 +5,7 @@ export const ingredients = (state: Ingredient[] = [], action: IngredientsActionT
         case ETypesAction.ADD: {
             const ingredient = {id: Date.now().toString(36) + Math.random().toString(36).substr(2), ...action.ingredient};
             if (state.length > 1) {
-                state.splice(state.length-1, 0, ingredient);
+                state.splice(state.length - 1, 0, ingredient);
                 return [...state];
             }
             return [...state, ingredient];

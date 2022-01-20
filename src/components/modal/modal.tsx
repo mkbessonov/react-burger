@@ -4,7 +4,8 @@ import styles from './modal.module.css'
 
 interface IModalProps {
     children: any,
-    handleClose: () => void
+    handleClose: () => void,
+    width: number
 }
 
 export const Modal = (props: IModalProps) => {
@@ -15,10 +16,10 @@ export const Modal = (props: IModalProps) => {
         }
     };
     return (<div className={styles.modal} ref={cardElementRef}>
-        <div className={styles.modal_window}>
+        <div className={styles.modal_window} style={{width: props.width}}>
             <span className={"text text_type_main-medium " + styles.close} onClick={props.handleClose}><CloseIcon
                 type="primary"/></span>
-            <div className={styles.modal_content}>{props.children}</div>
+            {props.children}
         </div>
     </div>);
-}
+};

@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
-import {AppHeader} from "./components/app-header/app-header";
-import {Main} from "./components/main/main";
+import './app.css';
+import {AppHeader} from "../app-header/app-header";
+import {Main} from "../main/main";
 import {Provider} from "react-redux";
-import {store} from "./store/store";
+import {store} from "../../store/store";
 
 function App() {
     return (

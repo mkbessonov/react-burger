@@ -1,4 +1,4 @@
-.footer{
+.footer {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -6,15 +6,18 @@
     padding-top: 40px;
     padding-bottom: 52px;
 }
-.sum{
+
+.sum {
     padding-right: 40px;
     float: left;
 }
-.sum p{
+
+.sum p {
     padding-right: 10px;
     float: left;
 }
-.sum svg{
+
+.sum svg {
     width: 40px;
     height: 40px;
 }

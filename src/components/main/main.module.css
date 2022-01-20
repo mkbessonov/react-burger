@@ -1,23 +1,24 @@
-.main{
+.main {
     padding-bottom: 20px;
     display: flex;
     justify-content: center;
 }
 
-.left_panel{
+.left_panel {
     float: left;
     width: 600px;
     padding-right: 40px
 }
 
-.right_panel{
+.right_panel {
     width: 600px;
     padding-top: 100px;
     display: flex;
     flex-direction: column;
     max-height: calc(70vh + 96px);
 }
-article{
+
+article {
     padding-bottom: 20px;
     padding-top: 40px;
 }

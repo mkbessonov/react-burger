@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = 'https://norma.nomoreparties.space/';
+const URL = 'https://norma.nomoreparties.space/api/';
 let instance = axios.create({
     baseURL: URL
 });

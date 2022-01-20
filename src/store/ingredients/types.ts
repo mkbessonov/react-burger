@@ -3,7 +3,8 @@ export enum ETypesAction {
     DELETE = "DELETE",
     SET = "SET"
 }
-export enum ETypesIngredient{
+
+export enum ETypesIngredient {
     BUN = "bun",
     SAUCE = "sauce",
     MAIN = "main"

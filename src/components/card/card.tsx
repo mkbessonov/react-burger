@@ -38,26 +38,28 @@ const Card = (props: ICardProps) => {
         handleAdd();
         setOpen(true);
     }
-    return (<>
-        <div className={styles.card} onClick={handleOpen} style={index % 2 === 0 ? {} : {padding: 0}}>
-            <img src={ingredient.image}
-                 className={styles.img_product}
-                 alt={ingredient.name}/>
-            <div style={{display: 'flex', flexDirection: 'column'}}>
-                <p className={'text text_type_digits-default ' + styles.price}>
-                    <span style={{paddingRight: '10px'}}>{ingredient.price}</span><CurrencyIcon type="primary"/>
-                </p>
-                <p className={'text text_type_main-default ' + styles.name_product}>
-                    {ingredient.name}
-                </p>
-            </div>
+    return (
+        <>
+            <div className={styles.card} onClick={handleOpen} style={index % 2 === 0 ? {} : {padding: 0}}>
+                <img src={ingredient.image}
+                     className={styles.img_product}
+                     alt={ingredient.name}/>
+                <div className={styles.text_product}>
+                    <p className={'text text_type_digits-default ' + styles.price}>
+                        <span>{ingredient.price}</span><CurrencyIcon type="primary"/>
+                    </p>
+                    <p className={'text text_type_main-default ' + styles.name_product}>
+                        {ingredient.name}
+                    </p>
+                </div>
 
-        </div>
-        {
-            open && <IngredientDetails ingredient={ingredient} handleClose={() => setOpen(false)}/>
-        }
-    </>);
-}
+            </div>
+            {
+                open && <IngredientDetails ingredient={ingredient} handleClose={() => setOpen(false)}/>
+            }
+        </>
+    );
+};
 
 const mapStateToProps = (state: ICardProps) => ({
     ingredients: state.ingredients

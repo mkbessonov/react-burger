@@ -3,6 +3,7 @@ import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger
 import {connect} from "react-redux";
 import {ETypesIngredient, Ingredient} from "../../store/ingredients/types";
 import {deleteIngredient} from "../../store/ingredients/actions";
+import styles from './burger-constructor.module.css'
 
 interface IBurgerConstructorProps {
     ingredients: Ingredient[],
@@ -33,12 +34,14 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
         return elem.name;
     };
     return (
-        <div style={{overflow: 'auto', marginBottom: 'auto'}}>
-            <div style={{display: 'flex', flexDirection: 'column', gap: '10px', marginLeft: '16px', marginRight: '6px'}}>
-                {ingredients.map((elem, index) => (
-                        <div style={{display: "flex", alignItems: "center"}}>
-                            {index !== 0 && index !== ingredients.length-1 && <span style={{paddingRight: '13.5px'}}> <DragIcon type="primary"/></span>}
-                            <span style={(index === 0 || index === ingredients.length-1) ? {paddingLeft: '37.5px'} : {}}><ConstructorElement
+        <div className={styles.burger_constructor_list}>
+            {ingredients.map((elem, index) => (
+                    <div className={styles.item}>
+                        {index !== 0 && index !== ingredients.length - 1 &&
+                            <span className={styles.drag_icon}> <DragIcon type="primary"/></span>}
+                        <span className={styles.elem_list}
+                              style={(index === 0 || index === ingredients.length - 1) ? {paddingLeft: '37.5px'} : {}}>
+                            <ConstructorElement
                                 key={elem.id}
                                 type={type(elem)}
                                 isLocked={isLocked(elem)}
@@ -48,11 +51,11 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
                                 handleClose={() => {
                                     deleteIngredient(elem)
                                 }}
-                            /></span>
-                        </div>
-                    )
-                )}
-            </div>
+                            />
+                    </span>
+                    </div>
+                )
+            )}
         </div>
     );
 };
