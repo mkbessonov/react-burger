@@ -36,13 +36,12 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
     return (
         <div className={styles.burger_constructor_list}>
             {ingredients.map((elem, index) => (
-                    <div className={styles.item}>
+                    <div className={styles.item} key={elem.id}>
                         {index !== 0 && index !== ingredients.length - 1 &&
                             <span className={styles.drag_icon}> <DragIcon type="primary"/></span>}
                         <span className={styles.elem_list}
                               style={(index === 0 || index === ingredients.length - 1) ? {paddingLeft: '37.5px'} : {}}>
                             <ConstructorElement
-                                key={elem.id}
                                 type={type(elem)}
                                 isLocked={isLocked(elem)}
                                 text={name(elem)}

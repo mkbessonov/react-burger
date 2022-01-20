@@ -1,12 +1,14 @@
 import {ETypesAction, Ingredient} from "./types";
 
 export const addIngredient = (ingredient: Ingredient) => {
-    return {type: ETypesAction.ADD, ingredient};
+    const newIngredient = {id: Date.now().toString(36) + Math.random().toString(36).substr(2), ...ingredient};
+    return {type: ETypesAction.ADD, ingredient: newIngredient};
 };
 export const deleteIngredient = (ingredient: Ingredient) => {
     return {type: ETypesAction.DELETE, ingredient};
 };
 
 export const setIngredient = (ingredient: Ingredient, index: number) => {
-    return {type: ETypesAction.SET, ingredient, index};
+    const newIngredient = {id: Date.now().toString(36) + Math.random().toString(36).substr(2), ...ingredient};
+    return {type: ETypesAction.SET, ingredient: newIngredient, index};
 };

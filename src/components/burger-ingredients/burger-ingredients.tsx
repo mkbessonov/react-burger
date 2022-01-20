@@ -12,10 +12,22 @@ export const BurgerIngredients = () => {
     const [main, setMain] = React.useState([]);
     useEffect(() => {
         getIngredients().then((result) => {
-            const data = result.data.data;
-            setBuns(data.filter((elem: Ingredient) => elem.type === 'bun'));
-            setSauce(data.filter((elem: Ingredient) => elem.type === 'sauce'));
-            setMain(data.filter((elem: Ingredient) => elem.type === 'main'));
+            if (result.data.success) {
+                const data = result.data.data;
+                setBuns(data.filter((elem: Ingredient) => elem.type === 'bun'));
+                setSauce(data.filter((elem: Ingredient) => elem.type === 'sauce'));
+                setMain(data.filter((elem: Ingredient) => elem.type === 'main'));
+            } else {
+                alert('Неизвестная ошибка')
+            }
+        }).catch(error => {
+            if (error.response) {
+                alert(`Ошибка ${error.response.data} ${error.response.status} ${error.response.headers}`);
+            } else if (error.request) {
+                alert(`Ошибка ${error.request}`);
+            } else {
+                alert(`Ошибка ${error.message}`);
+            }
         });
     }, []);
     return (
