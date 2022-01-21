@@ -5,6 +5,7 @@ import {Ingredient} from "../../store/ingredients/types";
 import {useMemo, useState} from "react";
 import styles from './place-an-order.module.css'
 import {OrderDetails} from "../order-details/order-details";
+import {Modal} from "../modal/modal";
 
 interface IPlaceAnOrderProps {
     ingredients: Ingredient[];
@@ -32,9 +33,9 @@ const PlaceAnOrder = (props: IPlaceAnOrderProps) => {
                 }}>
                     Оформить заказ
                 </Button>
-                {open && <OrderDetails handleClose={() => {
+                {open && <Modal width={720} handleClose={() => {
                     setOpen(false)
-                }}/>}
+                }}><OrderDetails/></Modal>}
             </div>
         );
     }

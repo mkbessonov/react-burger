@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import './app.css';
 import {AppHeader} from "../app-header/app-header";
 import {Main} from "../main/main";
 import {Provider} from "react-redux";

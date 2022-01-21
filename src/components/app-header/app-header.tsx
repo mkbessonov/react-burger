@@ -6,8 +6,8 @@ import styles from './app-header.module.css'
 export const AppHeader = () => {
     return (
         <header>
-            <nav>
-                <div className={styles.app_header}>
+            <nav className={styles.app_header}>
+                <div className={styles.app_header_link_container}>
                     <Link icon={<BurgerIcon type="secondary"/>} text={'Конструктор'}/>
                     <Link icon={<ListIcon type="secondary"/>} text={'Лента заказов'}/>
                     <div className={styles.logo}><Logo/></div>

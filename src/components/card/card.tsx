@@ -5,6 +5,7 @@ import {addIngredient, setIngredient} from "../../store/ingredients/actions";
 import {ETypesIngredient, Ingredient} from "../../store/ingredients/types";
 import {useState} from "react";
 import {IngredientDetails} from "../ingredient-details/ingredient-details";
+import {Modal} from '../modal/modal';
 
 interface ICardProps {
     ingredients: Ingredient[],
@@ -55,7 +56,9 @@ const Card = (props: ICardProps) => {
 
             </div>
             {
-                open && <IngredientDetails ingredient={ingredient} handleClose={() => setOpen(false)}/>
+                open && <Modal width={720} handleClose={() => setOpen(false)}>
+                    <IngredientDetails ingredient={ingredient}/>
+                </Modal>
             }
         </>
     );
