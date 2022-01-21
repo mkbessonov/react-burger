@@ -18,7 +18,7 @@ export const Modal = (props: IModalProps) => {
         };
         window.addEventListener("keydown", closeModal);
         return () => window.removeEventListener("keydown", closeModal)
-    });
+    }, [props.handleClose]);
     return (
         <ModalOverlay handleClose={props.handleClose}>
             <div className={styles.modal_window} style={{width: props.width}}>
