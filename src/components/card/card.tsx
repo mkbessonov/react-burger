@@ -4,20 +4,33 @@ import {connect} from "react-redux";
 import {addIngredient, setIngredient} from "../../store/ingredients/actions";
 import {ETypesIngredient, Ingredient} from "../../store/ingredients/types";
 import {useState} from "react";
-import {IngredientDetails} from "../ingredient-details/ingredient-details";
+import IngredientDetails from "../ingredient-details/ingredient-details";
 import {Modal} from '../modal/modal';
+import {clearIngredientInfo, setIngredientInfo} from "../../store/ingredient-info/actions";
 
 interface ICardProps {
     ingredients: Ingredient[],
     ingredient: Ingredient,
     index: number,
     addIngredient: typeof addIngredient,
-    setIngredient: typeof setIngredient
+    setIngredient: typeof setIngredient,
+    clearIngredientInfo: typeof clearIngredientInfo,
+    setIngredientInfo: typeof setIngredientInfo
 }
 
 const Card = (props: ICardProps) => {
-    const {ingredient, addIngredient, setIngredient, ingredients, index} = props;
+    const {
+        ingredient,
+        addIngredient,
+        setIngredient,
+        ingredients,
+        index,
+        setIngredientInfo,
+        clearIngredientInfo
+    } = props;
+
     const [open, setOpen] = useState<boolean>(false);
+
     const handleAdd = () => {
         if (ingredient.type !== ETypesIngredient.BUN && ingredients.length === 0) {
             alert('Сначала выберите булку');
@@ -35,10 +48,18 @@ const Card = (props: ICardProps) => {
         }
         addIngredient(ingredient);
     };
+
     const handleOpen = () => {
         handleAdd();
+        setIngredientInfo(ingredient);
         setOpen(true);
-    }
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        clearIngredientInfo()
+    };
+
     return (
         <>
             <div className={styles.card} onClick={handleOpen} style={index % 2 === 0 ? {} : {padding: 0}}>
@@ -56,8 +77,8 @@ const Card = (props: ICardProps) => {
 
             </div>
             {
-                open && <Modal width={720} handleClose={() => setOpen(false)}>
-                    <IngredientDetails ingredient={ingredient}/>
+                open && <Modal width={720} handleClose={handleClose}>
+                    <IngredientDetails/>
                 </Modal>
             }
         </>
@@ -70,5 +91,5 @@ const mapStateToProps = (state: ICardProps) => ({
 
 export default connect(
     mapStateToProps,
-    {addIngredient, setIngredient}
+    {addIngredient, setIngredient, setIngredientInfo, clearIngredientInfo}
 )(Card);

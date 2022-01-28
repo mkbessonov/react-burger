@@ -1,18 +1,28 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Ingredient} from "../../store/ingredients/types";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 import Card from "../card/card";
+import {connect} from "react-redux";
 
 interface IBurgerIngredientsProps {
-    buns: Ingredient[];
-    sauce: Ingredient[];
-    main: Ingredient[];
+    constructorElements: Ingredient[];
 }
 
-export const BurgerIngredients = (props: IBurgerIngredientsProps) => {
+const BurgerIngredients = (props: IBurgerIngredientsProps) => {
+    const {constructorElements} = props;
+
     const [currentTab, setCurrentTab] = React.useState('bun');
-    const {buns, sauce, main} = props;
+
+    const [buns, setBuns] = React.useState<Ingredient[]>([]);
+    const [sauce, setSauce] = React.useState<Ingredient[]>([]);
+    const [main, setMain] = React.useState<Ingredient[]>([]);
+
+    useEffect(() => {
+        setBuns(constructorElements.filter((elem: Ingredient) => elem.type === 'bun'));
+        setSauce(constructorElements.filter((elem: Ingredient) => elem.type === 'sauce'));
+        setMain(constructorElements.filter((elem: Ingredient) => elem.type === 'main'));
+    }, [constructorElements]);
     return (
         <>
             <div className={styles.tab}>
@@ -43,3 +53,12 @@ export const BurgerIngredients = (props: IBurgerIngredientsProps) => {
         </>
     );
 };
+
+const mapStateToProps = (state: IBurgerIngredientsProps) => ({
+    constructorElements: state.constructorElements
+});
+
+export default connect(
+    mapStateToProps,
+    {}
+)(BurgerIngredients);
