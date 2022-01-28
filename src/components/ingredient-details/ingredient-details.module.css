@@ -1,0 +1,34 @@
+.ingredient_info {
+    display: flex;
+    justify-content: space-between;
+    max-width: 520px;
+    margin: auto
+}
+
+.ingredient_info .cell {
+    display: flex;
+    flex-direction: column;
+    text-align: center
+}
+
+.ingredient_content {
+    padding: 40px
+}
+
+.ingredient_name {
+    padding-bottom: 32px;
+    text-align: center;
+    max-width: 520px;
+    margin: auto
+}
+
+.ingredient_img {
+    width: 100%;
+    display: flex
+}
+
+.ingredient_img img {
+    margin: auto;
+    display: flex;
+    padding-bottom: 16px
+}

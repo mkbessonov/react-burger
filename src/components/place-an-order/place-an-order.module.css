@@ -1,0 +1,23 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 16px;
+    padding-top: 40px;
+    padding-bottom: 52px;
+}
+
+.sum {
+    padding-right: 40px;
+    float: left;
+}
+
+.sum p {
+    padding-right: 10px;
+    float: left;
+}
+
+.sum svg {
+    width: 40px;
+    height: 40px;
+}

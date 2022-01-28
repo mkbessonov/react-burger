@@ -1,0 +1,29 @@
+.number_order {
+    text-shadow: 0 0 30px #5b5bff;
+    padding-bottom: 32px;
+    text-align: center;
+}
+
+.order_details_content {
+    padding: 120px 100px
+}
+
+.order_details_content img {
+    display: flex;
+    margin: auto;
+    width: 100px;
+    padding-bottom: 60px
+}
+
+.order_details_id {
+    text-align: center;
+    padding-bottom: 60px
+}
+
+.order_details_text {
+    text-align: center
+}
+
+.order_details_text div:first-child {
+    padding-bottom: 8px;
+}

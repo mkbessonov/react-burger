@@ -1,0 +1,32 @@
+.card {
+    float: left;
+    width: 272px;
+    padding-right: 24px;
+    padding-left: 16px;
+}
+
+.name_product {
+    text-align: center;
+}
+
+.img_product {
+    padding-bottom: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.text_product {
+    display: flex;
+    flex-direction: column
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.price span {
+    padding-right: 10px
+}
