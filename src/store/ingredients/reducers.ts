@@ -14,6 +14,11 @@ export const ingredients = (state: Ingredient[] = [], action: IngredientsActionT
         case ETypesAction.SET:
             action.index !== undefined && (state[action.index] = action.ingredient);
             return [...state];
+        case ETypesAction.MOVE: {
+            action.index !== undefined && (state[action.index].index = action.newIndex);
+            action.index  !== undefined && action.newIndex !== undefined && state.splice(action.index, 0, state.splice(action.newIndex, 1)[0]);
+            return [...state];
+        }
         default:
             return state;
     }

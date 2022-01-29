@@ -26,20 +26,20 @@ export const Main = () => {
             if (ingredient.type === ETypesIngredient.BUN && ingredients.length !== 0) {
                 ingredient._id && dispatch(decrement(ingredients[0]._id));
                 ingredient._id && dispatch(decrement(ingredients[0]._id));
-                dispatch(setIngredient(ingredient, 0));
-                dispatch(setIngredient(ingredient, ingredients.length - 1));
+                dispatch(setIngredient({...ingredient, index: 0}, 0));
+                dispatch(setIngredient({...ingredient, index: ingredients.length - 1}, ingredients.length - 1));
                 ingredient._id && dispatch(increment(ingredient._id));
                 ingredient._id && dispatch(increment(ingredient._id));
                 return;
             }
             if (ingredient.type === ETypesIngredient.BUN && ingredients.length === 0) {
-                dispatch(addIngredient(ingredient));
-                dispatch(addIngredient(ingredient));
+                dispatch(addIngredient({...ingredient, index: 0}));
+                dispatch(addIngredient({...ingredient, index: 1}));
                 ingredient._id && dispatch(increment(ingredient._id));
                 ingredient._id && dispatch(increment(ingredient._id));
                 return;
             }
-            dispatch(addIngredient(ingredient));
+            dispatch(addIngredient({...ingredient, index: ingredients.length - 2}));
             ingredient._id && dispatch(increment(ingredient._id));
         },
     });

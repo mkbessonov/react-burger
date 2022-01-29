@@ -1,6 +1,7 @@
 export enum ETypesAction {
     ADD = "ADD",
     DELETE = "DELETE",
+    MOVE = "MOVE",
     SET = "SET"
 }
 
@@ -24,11 +25,13 @@ export interface Ingredient {
     "image_mobile": string,
     "image_large": string,
     "__v": number,
-    count?: number
+    count?: number,
+    index?: number
 }
 
 export interface IngredientsActionType {
     type: ETypesAction,
     ingredient: Ingredient,
-    index?: number
+    index?: number,
+    newIndex?: number
 }
