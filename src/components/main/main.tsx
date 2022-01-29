@@ -2,9 +2,46 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import styles from './main.module.css'
 import PlaceAnOrder from "../place-an-order/place-an-order";
+import {useDrop} from "react-dnd";
+import {useDispatch, useSelector} from "react-redux";
+import {addIngredient, setIngredient} from "../../store/ingredients/actions";
+import {ETypesIngredient, Ingredient} from "../../store/ingredients/types";
+import {IRootState} from "../../store/store";
 
 export const Main = () => {
-
+    const dispatch = useDispatch();
+    const ingredients = useSelector((state: IRootState) => state.ingredients);
+    const [{isOver, canDrop}, drop] = useDrop({
+        accept: "ingredients",
+        collect: (monitor) => ({
+            isOver: monitor.isOver(),
+            canDrop: monitor.canDrop(),
+        }),
+        drop(ingredient: Ingredient) {
+            if (ingredient.type !== ETypesIngredient.BUN && ingredients.length === 0) {
+                alert('Сначала выберите булку');
+                return;
+            }
+            if (ingredient.type === ETypesIngredient.BUN && ingredients.length !== 0) {
+                dispatch(setIngredient(ingredient, 0));
+                dispatch(setIngredient(ingredient, ingredients.length - 1));
+                return;
+            }
+            if (ingredient.type === ETypesIngredient.BUN && ingredients.length === 0) {
+                dispatch(addIngredient(ingredient));
+                dispatch(addIngredient(ingredient));
+                return;
+            }
+            dispatch(addIngredient(ingredient));
+        },
+    });
+    const isActive = canDrop && isOver;
+    let border = 'none'
+    if (isActive) {
+        border = '1px solid #5b5bff';
+    } else if (canDrop) {
+        border = '1px solid white';
+    }
     return (
         <main>
             <div className={styles.main}>
@@ -14,7 +51,7 @@ export const Main = () => {
                     </article>
                     <BurgerIngredients/>
                 </div>
-                <div className={styles.right_panel}>
+                <div className={styles.right_panel} ref={drop} style={{border}}>
                     <BurgerConstructor/>
                     <PlaceAnOrder/>
                 </div>

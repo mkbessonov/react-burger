@@ -18,3 +18,5 @@ export const listApp = combineReducers({
 export const store = createStore(listApp,
     {},
     composedEnhancers);
+
+export type IRootState = ReturnType<typeof listApp>;
