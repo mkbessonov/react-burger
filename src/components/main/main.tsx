@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addIngredient, setIngredient} from "../../store/ingredients/actions";
 import {ETypesIngredient, Ingredient} from "../../store/ingredients/types";
 import {IRootState} from "../../store/store";
+import {decrement, increment} from "../../store/constructor-elements/actions";
 
 export const Main = () => {
     const dispatch = useDispatch();
@@ -23,16 +24,23 @@ export const Main = () => {
                 return;
             }
             if (ingredient.type === ETypesIngredient.BUN && ingredients.length !== 0) {
+                ingredient._id && dispatch(decrement(ingredients[0]._id));
+                ingredient._id && dispatch(decrement(ingredients[0]._id));
                 dispatch(setIngredient(ingredient, 0));
                 dispatch(setIngredient(ingredient, ingredients.length - 1));
+                ingredient._id && dispatch(increment(ingredient._id));
+                ingredient._id && dispatch(increment(ingredient._id));
                 return;
             }
             if (ingredient.type === ETypesIngredient.BUN && ingredients.length === 0) {
                 dispatch(addIngredient(ingredient));
                 dispatch(addIngredient(ingredient));
+                ingredient._id && dispatch(increment(ingredient._id));
+                ingredient._id && dispatch(increment(ingredient._id));
                 return;
             }
             dispatch(addIngredient(ingredient));
+            ingredient._id && dispatch(increment(ingredient._id));
         },
     });
     const isActive = canDrop && isOver;

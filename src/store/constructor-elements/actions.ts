@@ -26,3 +26,11 @@ export const initConstructor = () => {
 export const setIngredient = (ingredients: Ingredient[]) => {
     return {type: ETypesAction.SET_CONSTRUCTOR_ELEMENTS, ingredients};
 };
+
+export const increment = (id: string) => {
+    return {type: ETypesAction.INCREMENT, id};
+};
+
+export const decrement = (id: string) => {
+    return {type: ETypesAction.DECREMENT, id};
+};

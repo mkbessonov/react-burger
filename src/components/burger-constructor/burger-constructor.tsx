@@ -4,14 +4,16 @@ import {connect} from "react-redux";
 import {ETypesIngredient, Ingredient} from "../../store/ingredients/types";
 import {deleteIngredient} from "../../store/ingredients/actions";
 import styles from './burger-constructor.module.css'
+import {decrement} from "../../store/constructor-elements/actions";
 
 interface IBurgerConstructorProps {
     ingredients: Ingredient[],
-    deleteIngredient: typeof deleteIngredient
+    deleteIngredient: typeof deleteIngredient,
+    decrement: typeof decrement
 }
 
 const BurgerConstructor = (props: IBurgerConstructorProps) => {
-    const {ingredients, deleteIngredient} = props;
+    const {ingredients, deleteIngredient, decrement} = props;
     const isLocked = (elem: Ingredient) => {
         return elem.type === ETypesIngredient.BUN;
     };
@@ -48,6 +50,7 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
                                 price={elem.price}
                                 thumbnail={elem.image}
                                 handleClose={() => {
+                                    decrement(elem._id);
                                     deleteIngredient(elem)
                                 }}
                             />
@@ -65,5 +68,5 @@ const mapStateToProps = (state: IBurgerConstructorProps) => ({
 
 export default connect(
     mapStateToProps,
-    {deleteIngredient}
+    {deleteIngredient, decrement}
 )(BurgerConstructor);

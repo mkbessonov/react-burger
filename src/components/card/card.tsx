@@ -44,7 +44,7 @@ const Card = (props: ICardProps) => {
     return (
         <>
             <div className={styles.card} draggable style={index % 2 === 0 ? {} : {padding: 0}} ref={drag} onClick={handleOpen}>
-                <Counter count={233} size="small" />
+                {ingredient.count && <Counter count={ingredient.count} size="small" />}
                 <img src={ingredient.image}
                      className={styles.img_product}
                      draggable={false}
