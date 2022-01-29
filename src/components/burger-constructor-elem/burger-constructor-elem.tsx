@@ -1,4 +1,4 @@
-import styles from "../burger-constructor/burger-constructor.module.css";
+import styles from "./burger-constructor-elem.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {useRef} from "react";
 import {ETypesIngredient, Ingredient} from "../../store/ingredients/types";
