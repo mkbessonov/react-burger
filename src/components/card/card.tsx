@@ -1,11 +1,11 @@
 import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './card.module.css'
 import {connect} from "react-redux";
-import {Ingredient} from "../../store/ingredients/types";
+import {Ingredient} from "../../store/actions/types";
 import {useState} from "react";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import {Modal} from '../modal/modal';
-import {clearIngredientInfo, setIngredientInfo} from "../../store/ingredient-info/actions";
+import {clearIngredientInfo, setIngredientInfo} from "../../store/actions/ingredient-info";
 import {useDrag} from "react-dnd";
 
 interface ICardProps {

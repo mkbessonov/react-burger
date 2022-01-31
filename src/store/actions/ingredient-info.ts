@@ -1,4 +1,4 @@
-import {Ingredient} from "../ingredients/types";
+import {Ingredient} from "./types";
 import {ETypesAction} from "./types";
 
 export const setIngredientInfo = (ingredient: Ingredient) => {

@@ -1,9 +1,9 @@
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
-import {ingredients} from "./ingredients/reducers";
+import {ingredients} from "./reducers/ingredients";
 import thunk from "redux-thunk";
-import {constructorElements} from "./constructor-elements/reducers";
-import {ingredientInfo} from "./ingredient-info/reducers";
-import {orderDetails} from "./order-details/reducers";
+import {constructorElements} from "./reducers/constructor-elements";
+import {ingredientInfo} from "./reducers/ingredient-info";
+import {orderDetails} from "./reducers/order-details";
 
 const composedEnhancers = compose(
     applyMiddleware(thunk)

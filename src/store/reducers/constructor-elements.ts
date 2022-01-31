@@ -1,5 +1,4 @@
-import {ConstructorElementsActionType, ETypesAction} from "./types";
-import {Ingredient} from "../ingredients/types";
+import {ConstructorElementsActionType, ETypesAction, Ingredient} from "../actions/types";
 
 export interface IConstructorElements {
     ingredients: Ingredient[],

@@ -1,9 +1,9 @@
 import styles from "./burger-constructor-elem.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {useRef} from "react";
-import {ETypesIngredient, Ingredient} from "../../store/ingredients/types";
-import {decrement} from "../../store/constructor-elements/actions";
-import {deleteIngredient, moveIngredient} from "../../store/ingredients/actions";
+import {ETypesIngredient, Ingredient} from "../../store/actions/types";
+import {decrement} from "../../store/actions/constructor-elements";
+import {deleteIngredient, moveIngredient} from "../../store/actions/ingredients";
 import {DropTargetMonitor, useDrag, useDrop, XYCoord} from "react-dnd";
 
 interface IBurgerConstructorElemProps {

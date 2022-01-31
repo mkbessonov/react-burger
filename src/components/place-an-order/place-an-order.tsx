@@ -1,11 +1,11 @@
 import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components"
 import {connect} from "react-redux";
-import {Ingredient} from "../../store/ingredients/types";
 import {useMemo, useState} from "react";
 import styles from './place-an-order.module.css'
 import {OrderDetails} from "../order-details/order-details";
 import {Modal} from "../modal/modal";
-import {getOrder} from "../../store/order-details/actions";
+import {getOrder} from "../../store/actions/order-details";
+import {Ingredient} from "../../store/actions/types";
 
 interface IPlaceAnOrderProps {
     ingredients: Ingredient[];

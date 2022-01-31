@@ -1,4 +1,4 @@
-import {ETypesAction, Order, OrderDetailsActionType} from "./types";
+import {ETypesAction, Order, OrderDetailsActionType} from "../actions/types";
 
 export const orderDetails = (state: Order = {
     failed: false,

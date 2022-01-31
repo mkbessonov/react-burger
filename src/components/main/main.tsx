@@ -4,10 +4,10 @@ import styles from './main.module.css'
 import PlaceAnOrder from "../place-an-order/place-an-order";
 import {useDrop} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
-import {addIngredient, setIngredient} from "../../store/ingredients/actions";
-import {ETypesIngredient, Ingredient} from "../../store/ingredients/types";
+import {addIngredient, setIngredient} from "../../store/actions/ingredients";
+import {ETypesIngredient, Ingredient} from "../../store/actions/types";
 import {IRootState} from "../../store/store";
-import {decrement, increment} from "../../store/constructor-elements/actions";
+import {decrement, increment} from "../../store/actions/constructor-elements";
 
 export const Main = () => {
     const dispatch = useDispatch();

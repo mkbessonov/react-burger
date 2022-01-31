@@ -1,5 +1,5 @@
-import {ETypesAction, IngredientInfoActionType} from "./types";
-import {Ingredient} from "../ingredients/types";
+import {ETypesAction, Ingredient, IngredientInfoActionType} from "../actions/types";
+
 
 export const ingredientInfo = (state: Ingredient | null = null, action: IngredientInfoActionType) => {
     switch (action.type) {

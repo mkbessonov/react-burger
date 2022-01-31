@@ -2,7 +2,7 @@ import styles from './order-details.module.css'
 import React from "react";
 import {useSelector} from "react-redux";
 import {IRootState} from "../../store/store";
-import {Order} from "../../store/order-details/types";
+import {Order} from "../../store/actions/types";
 
 export const OrderDetails = () => {
     const {orderDetails, request, failed}: Order = useSelector((state: IRootState) => state.orderDetails);

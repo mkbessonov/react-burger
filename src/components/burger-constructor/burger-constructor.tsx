@@ -1,9 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Ingredient} from "../../store/ingredients/types";
-import {deleteIngredient, moveIngredient} from "../../store/ingredients/actions";
+import {Ingredient} from "../../store/actions/types";
+import {deleteIngredient, moveIngredient} from "../../store/actions/ingredients";
 import styles from './burger-constructor.module.css'
-import {decrement} from "../../store/constructor-elements/actions";
+import {decrement} from "../../store/actions/constructor-elements";
 import {BurgerConstructorElem} from "../burger-constructor-elem/burger-constructor-elem";
 
 interface IBurgerConstructorProps {

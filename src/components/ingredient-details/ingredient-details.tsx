@@ -1,4 +1,4 @@
-import {Ingredient} from "../../store/ingredients/types";
+import {Ingredient} from "../../store/actions/types";
 import styles from './ingredient-details.module.css'
 import {connect} from "react-redux";
 

@@ -1,10 +1,10 @@
-import React, {useEffect, useRef} from "react";
-import {Ingredient} from "../../store/ingredients/types";
+import React, {useRef} from "react";
+import {Ingredient} from "../../store/actions/types";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 import Card from "../card/card";
 import {connect} from "react-redux";
-import {IConstructorElements} from "../../store/constructor-elements/reducers";
+import {IConstructorElements} from "../../store/reducers/constructor-elements";
 
 interface IBurgerIngredientsProps {
     constructorElements: IConstructorElements;
@@ -14,16 +14,6 @@ const BurgerIngredients = (props: IBurgerIngredientsProps) => {
         const {ingredients, request, failed} = props.constructorElements;
 
         const [currentTab, setCurrentTab] = React.useState('bun');
-
-        const [buns, setBuns] = React.useState<Ingredient[]>([]);
-        const [sauce, setSauce] = React.useState<Ingredient[]>([]);
-        const [main, setMain] = React.useState<Ingredient[]>([]);
-
-        useEffect(() => {
-            setBuns(ingredients.filter((elem: Ingredient) => elem.type === 'bun'));
-            setSauce(ingredients.filter((elem: Ingredient) => elem.type === 'sauce'));
-            setMain(ingredients.filter((elem: Ingredient) => elem.type === 'main'));
-        }, [ingredients]);
 
         const block = useRef<HTMLDivElement>(null);
         const bunsRef = useRef<HTMLDivElement>(null);
@@ -73,15 +63,15 @@ const BurgerIngredients = (props: IBurgerIngredientsProps) => {
                 <div className={styles.ingredients_cards} ref={block} onScroll={handleScroll}>
                     <h2 className='text text_type_main-medium' ref={bunsRef}>Булки</h2>
                     <div className={styles.ingredients_block}>
-                        {buns.map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
+                        {ingredients.filter((elem: Ingredient) => elem.type === 'bun').map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
                     </div>
                     <h2 className='text text_type_main-medium' ref={sauceRef}>Соусы</h2>
                     <div className={styles.ingredients_block}>
-                        {sauce.map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
+                        {ingredients.filter((elem: Ingredient) => elem.type === 'sauce').map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
                     </div>
                     <h2 className='text text_type_main-medium' ref={mainRef}>Начинки</h2>
                     <div className={styles.ingredients_block}>
-                        {main.map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
+                        {ingredients.filter((elem: Ingredient) => elem.type === 'main').map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
                     </div>
                 </div>
             </>

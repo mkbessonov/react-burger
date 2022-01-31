@@ -1,5 +1,4 @@
-import {Ingredient} from "../ingredients/types";
-import {ETypesAction} from "./types";
+import {ETypesAction, Ingredient} from "./types";
 import {getIngredients} from "../../service/ingredients-service";
 
 export const initConstructor = () => {
