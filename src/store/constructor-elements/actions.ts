@@ -28,10 +28,10 @@ export const initConstructor = () => {
     };
 };
 
-export const setIngredients = (ingredients: Ingredient[]) => {
+const setIngredients = (ingredients: Ingredient[]) => {
     return {type: ETypesAction.GET_CONSTRUCTOR_ELEMENTS_SUCCESS, ingredients};
 };
-export const setError = () => {
+const setError = () => {
     return {type: ETypesAction.GET_CONSTRUCTOR_ELEMENTS_ERROR};
 };
 

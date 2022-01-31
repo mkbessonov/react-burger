@@ -11,7 +11,7 @@ interface IBurgerIngredientsProps {
 }
 
 const BurgerIngredients = (props: IBurgerIngredientsProps) => {
-        const {ingredients, feedRequest, feedFailed} = props.constructorElements;
+        const {ingredients, request, failed} = props.constructorElements;
 
         const [currentTab, setCurrentTab] = React.useState('bun');
 
@@ -52,9 +52,9 @@ const BurgerIngredients = (props: IBurgerIngredientsProps) => {
             }
 
         };
-        if (feedFailed) {
+        if (failed) {
             return <p>Произошла ошибка при получении данных</p>
-        } else if (feedRequest) {
+        } else if (request) {
             return <p>Загрузка...</p>
         }
         return (

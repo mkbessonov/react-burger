@@ -3,34 +3,34 @@ import {Ingredient} from "../ingredients/types";
 
 export interface IConstructorElements {
     ingredients: Ingredient[],
-    feedFailed: boolean,
-    feedRequest: boolean
+    failed: boolean,
+    request: boolean
 }
 
 export const constructorElements = (state: IConstructorElements = {
     ingredients: [],
-    feedFailed: false,
-    feedRequest: false
+    failed: false,
+    request: false
 }, action: ConstructorElementsActionType) => {
     switch (action.type) {
         case ETypesAction.GET_CONSTRUCTOR_ELEMENTS:
             return {
                 ...state,
-                feedRequest: true,
-                feedFailed: false,
+                request: true,
+                failed: false,
             };
         case ETypesAction.GET_CONSTRUCTOR_ELEMENTS_SUCCESS: {
             return {
                 ...state,
                 ingredients: action.ingredients,
-                feedRequest: false
+                request: false
             };
         }
         case ETypesAction.GET_CONSTRUCTOR_ELEMENTS_ERROR: {
             return {
                 ...state,
-                feedFailed: true,
-                feedRequest: false
+                failed: true,
+                request: false
             };
         }
         case ETypesAction.INCREMENT: {
