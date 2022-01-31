@@ -5,9 +5,15 @@ import {constructorElements} from "./reducers/constructor-elements";
 import {ingredientInfo} from "./reducers/ingredient-info";
 import {orderDetails} from "./reducers/order-details";
 
-const composedEnhancers = compose(
-    applyMiddleware(thunk)
-);
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+
+const composeEnhancers = process.env.NODE_ENV === 'development' ? (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) : compose;
+
+const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 export const listApp = combineReducers({
     ingredients,
@@ -17,6 +23,6 @@ export const listApp = combineReducers({
 });
 export const store = createStore(listApp,
     {},
-    composedEnhancers);
+    enhancer);
 
 export type IRootState = ReturnType<typeof listApp>;
