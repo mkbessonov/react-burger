@@ -4,11 +4,15 @@ import {getIngredients} from "../../service/ingredients-service";
 
 export const initConstructor = () => {
     return (dispatch: any) => {
+        dispatch({
+            type: ETypesAction.GET_CONSTRUCTOR_ELEMENTS
+        })
         getIngredients().then((result) => {
             if (result.data.success) {
                 const data = result.data.data;
-                dispatch(setIngredient(data));
+                dispatch(setIngredients(data));
             } else {
+                dispatch(setError());
                 alert('Неизвестная ошибка')
             }
         }).catch(error => {
@@ -19,12 +23,16 @@ export const initConstructor = () => {
             } else {
                 alert(`Ошибка ${error.message}`);
             }
+            dispatch(setError());
         });
     };
 };
 
-export const setIngredient = (ingredients: Ingredient[]) => {
-    return {type: ETypesAction.SET_CONSTRUCTOR_ELEMENTS, ingredients};
+export const setIngredients = (ingredients: Ingredient[]) => {
+    return {type: ETypesAction.GET_CONSTRUCTOR_ELEMENTS_SUCCESS, ingredients};
+};
+export const setError = () => {
+    return {type: ETypesAction.GET_CONSTRUCTOR_ELEMENTS_ERROR};
 };
 
 export const increment = (id: string) => {

@@ -4,13 +4,14 @@ import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 import Card from "../card/card";
 import {connect} from "react-redux";
+import {IConstructorElements} from "../../store/constructor-elements/reducers";
 
 interface IBurgerIngredientsProps {
-    constructorElements: Ingredient[];
+    constructorElements: IConstructorElements;
 }
 
 const BurgerIngredients = (props: IBurgerIngredientsProps) => {
-        const {constructorElements} = props;
+        const {ingredients, feedRequest, feedFailed} = props.constructorElements;
 
         const [currentTab, setCurrentTab] = React.useState('bun');
 
@@ -19,10 +20,10 @@ const BurgerIngredients = (props: IBurgerIngredientsProps) => {
         const [main, setMain] = React.useState<Ingredient[]>([]);
 
         useEffect(() => {
-            setBuns(constructorElements.filter((elem: Ingredient) => elem.type === 'bun'));
-            setSauce(constructorElements.filter((elem: Ingredient) => elem.type === 'sauce'));
-            setMain(constructorElements.filter((elem: Ingredient) => elem.type === 'main'));
-        }, [constructorElements]);
+            setBuns(ingredients.filter((elem: Ingredient) => elem.type === 'bun'));
+            setSauce(ingredients.filter((elem: Ingredient) => elem.type === 'sauce'));
+            setMain(ingredients.filter((elem: Ingredient) => elem.type === 'main'));
+        }, [ingredients]);
 
         const block = useRef<HTMLDivElement>(null);
         const bunsRef = useRef<HTMLDivElement>(null);
@@ -51,6 +52,11 @@ const BurgerIngredients = (props: IBurgerIngredientsProps) => {
             }
 
         };
+        if (feedFailed) {
+            return <p>Произошла ошибка при получении данных</p>
+        } else if (feedRequest) {
+            return <p>Загрузка...</p>
+        }
         return (
             <>
                 <div className={styles.tab}>
