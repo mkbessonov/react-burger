@@ -1,0 +1,14 @@
+.item {
+    display: flex;
+    width: 100%;
+    align-items: center
+}
+
+.drag_icon {
+    padding-right: 13.5px
+}
+
+.elem_list {
+    width: 100%;
+    display: flex;
+}

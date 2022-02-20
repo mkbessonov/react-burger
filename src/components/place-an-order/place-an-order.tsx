@@ -1,18 +1,19 @@
 import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components"
 import {connect} from "react-redux";
-import {deleteIngredient} from "../../store/ingredients/actions";
-import {Ingredient} from "../../store/ingredients/types";
 import {useMemo, useState} from "react";
 import styles from './place-an-order.module.css'
 import {OrderDetails} from "../order-details/order-details";
 import {Modal} from "../modal/modal";
+import {getOrder} from "../../store/actions/order-details";
+import {Ingredient} from "../../store/actions/types";
 
 interface IPlaceAnOrderProps {
     ingredients: Ingredient[];
+    getOrder: (ingredients: string[]) => void;
 }
 
 const PlaceAnOrder = (props: IPlaceAnOrderProps) => {
-    const {ingredients} = props;
+    const {ingredients, getOrder} = props;
     const [open, setOpen] = useState<boolean>(false);
     const sum = useMemo(() => {
         let newSum = 0;
@@ -29,6 +30,7 @@ const PlaceAnOrder = (props: IPlaceAnOrderProps) => {
                     <CurrencyIcon type="primary"/>
                 </div>
                 <Button type="primary" size="medium" onClick={() => {
+                    getOrder(ingredients.map(elem => elem._id));
                     setOpen(true)
                 }}>
                     Оформить заказ
@@ -48,5 +50,5 @@ const mapStateToProps = (state: IPlaceAnOrderProps) => ({
 
 export default connect(
     mapStateToProps,
-    {deleteIngredient}
+    {getOrder}
 )(PlaceAnOrder);

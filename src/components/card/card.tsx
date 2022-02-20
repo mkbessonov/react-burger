@@ -1,49 +1,53 @@
-import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './card.module.css'
 import {connect} from "react-redux";
-import {addIngredient, setIngredient} from "../../store/ingredients/actions";
-import {ETypesIngredient, Ingredient} from "../../store/ingredients/types";
+import {Ingredient} from "../../store/actions/types";
 import {useState} from "react";
-import {IngredientDetails} from "../ingredient-details/ingredient-details";
+import IngredientDetails from "../ingredient-details/ingredient-details";
 import {Modal} from '../modal/modal';
+import {clearIngredientInfo, setIngredientInfo} from "../../store/actions/ingredient-info";
+import {useDrag} from "react-dnd";
 
 interface ICardProps {
     ingredients: Ingredient[],
     ingredient: Ingredient,
     index: number,
-    addIngredient: typeof addIngredient,
-    setIngredient: typeof setIngredient
+    clearIngredientInfo: typeof clearIngredientInfo,
+    setIngredientInfo: typeof setIngredientInfo
 }
 
 const Card = (props: ICardProps) => {
-    const {ingredient, addIngredient, setIngredient, ingredients, index} = props;
+    const {
+        ingredient,
+        index,
+        setIngredientInfo,
+        clearIngredientInfo
+    } = props;
+
     const [open, setOpen] = useState<boolean>(false);
-    const handleAdd = () => {
-        if (ingredient.type !== ETypesIngredient.BUN && ingredients.length === 0) {
-            alert('Сначала выберите булку');
-            return;
-        }
-        if (ingredient.type === ETypesIngredient.BUN && ingredients.length !== 0) {
-            setIngredient(ingredient, 0);
-            setIngredient(ingredient, ingredients.length - 1);
-            return;
-        }
-        if (ingredient.type === ETypesIngredient.BUN && ingredients.length === 0) {
-            addIngredient(ingredient);
-            addIngredient(ingredient);
-            return;
-        }
-        addIngredient(ingredient);
-    };
+
     const handleOpen = () => {
-        handleAdd();
+        setIngredientInfo(ingredient);
         setOpen(true);
-    }
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        clearIngredientInfo()
+    };
+
+    const [, drag] = useDrag({
+        type: 'ingredients',
+        item: ingredient
+    });
+
     return (
         <>
-            <div className={styles.card} onClick={handleOpen} style={index % 2 === 0 ? {} : {padding: 0}}>
+            <div className={styles.card} draggable style={index % 2 === 0 ? {} : {padding: 0}} ref={drag} onClick={handleOpen}>
+                {ingredient.count && <Counter count={ingredient.count} size="small" />}
                 <img src={ingredient.image}
                      className={styles.img_product}
+                     draggable={false}
                      alt={ingredient.name}/>
                 <div className={styles.text_product}>
                     <p className={'text text_type_digits-default ' + styles.price}>
@@ -56,8 +60,8 @@ const Card = (props: ICardProps) => {
 
             </div>
             {
-                open && <Modal width={720} handleClose={() => setOpen(false)}>
-                    <IngredientDetails ingredient={ingredient}/>
+                open && <Modal width={720} handleClose={handleClose}>
+                    <IngredientDetails/>
                 </Modal>
             }
         </>
@@ -70,5 +74,5 @@ const mapStateToProps = (state: ICardProps) => ({
 
 export default connect(
     mapStateToProps,
-    {addIngredient, setIngredient}
+    {setIngredientInfo, clearIngredientInfo}
 )(Card);
