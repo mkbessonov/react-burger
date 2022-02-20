@@ -1,0 +1,26 @@
+.container {
+    margin: auto;
+}
+
+.content {
+    display: flex;
+    align-items: stretch;
+    flex: 1;
+}
+
+.text {
+    text-align: center;
+    padding-bottom: 24px;
+}
+
+.row {
+    padding-bottom: 24px;
+}
+.center{
+    display: flex;
+    justify-content: center;
+}
+.text_bottom{
+    text-align: center;
+    padding-top: 80px;
+}
