@@ -8,15 +8,17 @@ import {HTML5Backend} from "react-dnd-html5-backend";
 import {DndProvider} from "react-dnd";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {Register} from "../register/register";
+import {Login} from "../login/login";
 
 function App() {
     initConstructor()(store.dispatch);
     return (
         <Provider store={store}>
             <AppHeader/>
-            <BrowserRouter basename={'/ui/rb/pdoc/v1'}>
+            <BrowserRouter>
                 <Switch>
                     <Route path='/register'><Register/></Route>
+                    <Route path='/login'><Login/></Route>
                     <Route path='/'>
                         <DndProvider backend={HTML5Backend}>
                             <Main/>
