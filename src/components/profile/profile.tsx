@@ -1,7 +1,7 @@
 import styles from "./profile.module.css";
 import {EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {useState} from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 
 enum CONTENT {
     PROFILE = 'PROFILE',
@@ -9,8 +9,9 @@ enum CONTENT {
 }
 
 export const Profile = () => {
+    const location = useLocation();
 
-    const [currentContent, setCurrentContent] = useState<CONTENT>(CONTENT.PROFILE);
+    const [currentContent, setCurrentContent] = useState<CONTENT>(location.pathname === '/profile' ? CONTENT.PROFILE : CONTENT.ORDER);
 
     const [pass, setPass] = useState<string>('');
     const [name, setName] = useState<string>('');

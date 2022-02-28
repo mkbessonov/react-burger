@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 import {constructorElements} from "./reducers/constructor-elements";
 import {ingredientInfo} from "./reducers/ingredient-info";
 import {orderDetails} from "./reducers/order-details";
+import {user} from "./reducers/user";
 
 declare global {
     interface Window {
@@ -19,7 +20,8 @@ export const listApp = combineReducers({
     ingredients,
     constructorElements,
     ingredientInfo,
-    orderDetails
+    orderDetails,
+    user
 });
 export const store = createStore(listApp,
     {},
