@@ -28,7 +28,7 @@ export const Profile = () => {
             if (res && res.data.success) {
                 const newUser = res.data.user;
                 dispatch(setUser(newUser));
-                setOldValue({email: newUser.email || '', name: newUser.name || '', pass: ''})
+                setOldValue({email: form.email, name: form.name, pass: form.pass})
             }
         });
     };

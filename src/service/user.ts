@@ -6,7 +6,9 @@ export const getUser = async () => {
 };
 export const updateUser = async (email: string, pass: string, name: string) => {
     return await api.patch(`/auth/user`, {
-        user: {email, password: pass, name},
-        headers: {Authorization: 'Bearer ' + getCookie('token')}
-    });
+            user: {email, password: pass, name}
+        },
+        {
+            headers: {Authorization: 'Bearer ' + getCookie('token')}
+        });
 };

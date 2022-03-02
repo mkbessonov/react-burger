@@ -6,7 +6,7 @@ import {store} from "../../store/store";
 import {initConstructor} from "../../store/actions/constructor-elements";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {DndProvider} from "react-dnd";
-import {BrowserRouter, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {Register} from "../register/register";
 import {Login} from "../login/login";
 import {ForgotPassword} from "../forgot-password/forgot-password";
@@ -29,11 +29,11 @@ function App() {
                         <NotAuthRote path='/forgot-password'><ForgotPassword/></NotAuthRote>
                         <NotAuthRote path='/reset-password'><ResetPassword/></NotAuthRote>
                         <ProtectedRoute path='/profile'><Profile/></ProtectedRoute>
-                        <ProtectedRoute path='/'>
+                        <Route path='/'>
                             <DndProvider backend={HTML5Backend}>
                                 <Main/>
                             </DndProvider>
-                        </ProtectedRoute>
+                        </Route>
                     </Switch>
                 </BrowserRouter>
             </ProvideAuth>
