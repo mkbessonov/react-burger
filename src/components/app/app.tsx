@@ -15,9 +15,13 @@ import {Profile} from "../profile/profile";
 import {ProvideAuth} from "../../service/auth";
 import {ProtectedRoute} from "../protected-route/protected-route";
 import {NotAuthRote} from "../not-auth-route/not-auth-route";
+import {IngredientDetails} from "../ingredient-details/ingredient-details";
+import {Modal} from "../modal/modal";
+
 
 function App() {
     initConstructor()(store.dispatch);
+
     return (
         <Provider store={store}>
             <ProvideAuth>
@@ -29,7 +33,16 @@ function App() {
                         <NotAuthRote path='/forgot-password'><ForgotPassword/></NotAuthRote>
                         <NotAuthRote path='/reset-password'><ResetPassword/></NotAuthRote>
                         <ProtectedRoute path='/profile'><Profile/></ProtectedRoute>
-                        <Route path='/'>
+                        <Route path={"/ingredients/:id"}><>
+                            <DndProvider backend={HTML5Backend}>
+                                <Main/>
+                            </DndProvider>
+                            <Modal width={720} >
+                                <IngredientDetails/>
+                            </Modal>
+                        </>
+                        </Route>
+                        <Route path={"/ingredients"}>
                             <DndProvider backend={HTML5Backend}>
                                 <Main/>
                             </DndProvider>

@@ -1,15 +1,42 @@
-import {Ingredient} from "../../store/actions/types";
+import {ETypesIngredient, Ingredient} from "../../store/actions/types";
 import styles from './ingredient-details.module.css'
-import {connect} from "react-redux";
+import {useLocation} from "react-router-dom";
+import {getIngredients} from "../../service/ingredients-service";
+import {useEffect, useState} from "react";
 
-interface IIngredientDetailsProps {
-    ingredientInfo: Ingredient
-}
+export const IngredientDetails = () => {
+    const location = useLocation();
+    const path = location.pathname.split('/');
+    const id = path[path.length - 1];
+    const [ingredientInfo, setIngredientInfo] = useState<Ingredient>({
+        __v: 0,
+        _id: "",
+        calories: 0,
+        carbohydrates: 0,
+        fat: 0,
+        image: "",
+        image_large: "",
+        image_mobile: "",
+        name: "",
+        price: 0,
+        proteins: 0,
+        type: ETypesIngredient.BUN
+    });
+    useEffect(() => {
+        getIngredients().then((result) => {
+            if (result.data.success) {
+                const ingredients = result.data.data;
+                setIngredientInfo(ingredients.filter((elem: Ingredient) => (elem._id === id))[0] || null);
+            } else {
+                alert('Неизвестная ошибка')
+            }
+        }).catch(() => {
+            alert('Ошибка');
+        })
+    }, []);
 
-const IngredientDetails = (props: IIngredientDetailsProps) => {
-    const {ingredientInfo} = props;
     return (
-        ingredientInfo && <div className={styles.ingredient_content}>
+        <div className={styles.ingredient_content}>
             <div className="text text_type_main-large">Детали ингредиента</div>
             <div className={styles.ingredient_img}><img src={ingredientInfo.image_large} height='240px'
                                                         alt={ingredientInfo.name}/></div>
@@ -38,11 +65,3 @@ const IngredientDetails = (props: IIngredientDetailsProps) => {
     );
 };
 
-const mapStateToProps = (state: IIngredientDetailsProps) => ({
-    ingredientInfo: state.ingredientInfo
-});
-
-export default connect(
-    mapStateToProps,
-    {}
-)(IngredientDetails);

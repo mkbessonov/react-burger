@@ -40,7 +40,7 @@ export const NotAuthRote = (props: INotAuthRoteProps) => {
     if (auth.user.user) {
         return (
             <Redirect
-                to={'/'}
+                to={'/ingredients'}
             />
         );
     }

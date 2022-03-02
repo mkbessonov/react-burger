@@ -20,6 +20,7 @@
 .left_panel_button {
     line-height: 64px;
     text-decoration: unset;
+    cursor: pointer;
 }
 
 .right_panel {

@@ -47,12 +47,11 @@ export const Profile = () => {
                 <NavLink to={'/profile/orders'} onClick={() => setCurrentContent(CONTENT.ORDER)}
                          className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}
                          activeClassName={styles.active_button}>История заказов</NavLink>
-                <NavLink to={'/login'}
+                <div
                          onClick={() => {
                              dispatch(signOutAction())
                          }}
-                         className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}
-                         activeClassName={styles.active_button}>Выход</NavLink>
+                         className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}>Выход</div>
             </div>
             <div className={styles.right_panel}>
                 {currentContent === CONTENT.PROFILE && <>
