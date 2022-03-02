@@ -20,7 +20,6 @@ export const ResetPassword = () => {
         resetPassword(pass, token).then((data) => {
             data.data.success && history.replace({pathname: '/login'});
         }).catch((e) => {
-            console.log(e);
             alert('Произошла ошибка ' + e.message);
         });
     };

@@ -12,6 +12,7 @@ export const ForgotPassword = () => {
         () => {
             forgotPassword(email).then((data)=>{
                 const result = data.data;
+                result.success && localStorage.setItem('forgotSuccessful', 'true');
                 result.success && history.replace({ pathname: '/reset-password' });
             }).catch(()=>{
                 alert('Произошла ошибка');

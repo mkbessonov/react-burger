@@ -19,8 +19,8 @@ export function useProvideAuth() {
     const user = useSelector((state: IRootState) => state.user);
     const dispatch = useDispatch()
     const getAndSetUser = () => {
-        getUser().then((res) => {
-            if (res.data.success) {
+        return getUser().then((res) => {
+            if (res && res.data.success) {
                 const user = res.data.user;
                 dispatch(setUser(user));
             }

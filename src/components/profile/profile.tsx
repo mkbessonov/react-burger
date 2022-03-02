@@ -2,6 +2,8 @@ import styles from "./profile.module.css";
 import {EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {useState} from "react";
 import {NavLink, useLocation} from "react-router-dom";
+import {signOutAction} from "../../store/actions/user";
+import {useDispatch} from "react-redux";
 
 enum CONTENT {
     PROFILE = 'PROFILE',
@@ -10,6 +12,7 @@ enum CONTENT {
 
 export const Profile = () => {
     const location = useLocation();
+    const dispatch = useDispatch();
 
     const [currentContent, setCurrentContent] = useState<CONTENT>(location.pathname === '/profile' ? CONTENT.PROFILE : CONTENT.ORDER);
 
@@ -35,7 +38,8 @@ export const Profile = () => {
                 <NavLink to={'/profile/orders'} onClick={() => setCurrentContent(CONTENT.ORDER)}
                          className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}
                          activeClassName={styles.active_button}>История заказов</NavLink>
-                <NavLink to={'/logout'}
+                <NavLink to={'/login'}
+                         onClick={()=>{dispatch(signOutAction())}}
                          className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}
                          activeClassName={styles.active_button}>Выход</NavLink>
             </div>

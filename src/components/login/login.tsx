@@ -1,13 +1,13 @@
 import styles from "./login.module.css";
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {useCallback, useState} from "react";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useHistory} from "react-router";
 import {useAuth} from "../../service/auth";
 
 export const Login = () => {
     const history = useHistory();
-    let auth = useAuth();
+    let {getAndSetUser, ...auth} = useAuth();
     const [pass, setPass] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const onChangePass = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,16 +27,7 @@ export const Login = () => {
         },
         [auth, history, email, pass]
     );
-    console.log(auth.user.user, 89);
-    if (auth.user.user) {
-        return (
-            <Redirect
-                to={{
-                    pathname: '/'
-                }}
-            />
-        );
-    }
+
     return <main className={styles.content}>
         <div className={styles.container}>
             <p className={"text text_type_main-medium " + styles.text}>Вход</p>
