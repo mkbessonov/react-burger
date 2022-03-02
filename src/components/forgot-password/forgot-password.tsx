@@ -24,17 +24,17 @@ export const ForgotPassword = () => {
         setEmail(e.target.value);
     };
     return <main className={styles.content}>
-        <div className={styles.container}>
+        <form className={styles.container} onSubmit={onClick}>
             <p className={"text text_type_main-medium " + styles.text}>Восстановление пароля</p>
             <div className={styles.row}><EmailInput onChange={onChange} value={email} name={'Укажите e-mail'}/></div>
             <div className={styles.center}>
-                <Button type="primary" size="large" onClick={onClick}>
+                <Button type="primary" size="large" htmlType='submit'>
                    Восстановить
                 </Button>
             </div>
             <div>
                 <p className={"text text_type_main-default text_color_inactive " + styles.text_bottom}>Вспомнили пароль? <Link to={'/login'}>Войти</Link></p>
             </div>
-        </div>
+        </form>
     </main>;
 }
