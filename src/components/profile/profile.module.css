@@ -16,7 +16,8 @@
     display: flex;
     flex-direction: column;
 }
-.left_panel_button{
+
+.left_panel_button {
     line-height: 64px;
     text-decoration: unset;
 }
@@ -24,12 +25,20 @@
 .right_panel {
 
 }
+
 .row {
     padding-bottom: 24px;
 }
-.row div:first-child{
+
+.row div:first-child {
     width: 480px;
 }
-.active_button{
-   color: white;
+
+.active_button {
+    color: white;
+}
+
+.buttons {
+    display: flex;
+    justify-content: end;
 }

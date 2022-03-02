@@ -1,9 +1,11 @@
 import styles from "./profile.module.css";
-import {EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {useState} from "react";
 import {NavLink, useLocation} from "react-router-dom";
-import {signOutAction} from "../../store/actions/user";
-import {useDispatch} from "react-redux";
+import {setUser, signOutAction} from "../../store/actions/user";
+import {useDispatch, useSelector} from "react-redux";
+import {IRootState} from "../../store/store";
+import {updateUser} from "../../service/user";
 
 enum CONTENT {
     PROFILE = 'PROFILE',
@@ -15,19 +17,26 @@ export const Profile = () => {
     const dispatch = useDispatch();
 
     const [currentContent, setCurrentContent] = useState<CONTENT>(location.pathname === '/profile' ? CONTENT.PROFILE : CONTENT.ORDER);
-
-    const [pass, setPass] = useState<string>('');
-    const [name, setName] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
-    const onChangePass = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPass(e.target.value);
+    const user = useSelector((state: IRootState) => state.user);
+    const [form, setValue] = useState({email: user.user?.email || '', name: user.user?.name || '', pass: ''});
+    const [oldForm, setOldValue] = useState({email: user.user?.email || '', name: user.user?.name || '', pass: ''});
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValue({...form, [e.target.name]: e.target.value});
     };
-    const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setName(e.target.value);
+    const save = () => {
+        updateUser(form.email, form.pass, form.name).then((res) => {
+            if (res && res.data.success) {
+                const newUser = res.data.user;
+                dispatch(setUser(newUser));
+                setOldValue({email: newUser.email || '', name: newUser.name || '', pass: ''})
+            }
+        });
     };
-
-    const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
+    const revert = () => {
+        setValue({email: oldForm.email || '', name: oldForm.name || '', pass: oldForm.pass});
+    };
+    const isEqual = () => {
+        return form.email === oldForm.email && form.name === oldForm.name && form.pass === oldForm.pass;
     };
     return <main className={styles.content}>
         <div className={styles.container}>
@@ -39,20 +48,33 @@ export const Profile = () => {
                          className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}
                          activeClassName={styles.active_button}>История заказов</NavLink>
                 <NavLink to={'/login'}
-                         onClick={()=>{dispatch(signOutAction())}}
+                         onClick={() => {
+                             dispatch(signOutAction())
+                         }}
                          className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}
                          activeClassName={styles.active_button}>Выход</NavLink>
             </div>
             <div className={styles.right_panel}>
                 {currentContent === CONTENT.PROFILE && <>
-                    <div className={styles.row}><Input
-                        type={'text'}
-                        placeholder={'Имя'}
-                        error={false}
-                        onChange={onChangeName} value={name}/></div>
-                    <div className={styles.row}><EmailInput onChange={onChangeEmail} value={email} name={'E-mail'}/>
-                    </div>
-                    <div className={styles.row}><PasswordInput onChange={onChangePass} value={pass} name={'Пароль'}/>
+                    <div>
+                        <div className={styles.row}><Input
+                            type={'text'}
+                            name={'name'}
+                            placeholder={'Имя'}
+                            error={false}
+                            onChange={onChange} value={form.name}/></div>
+                        <div className={styles.row}><EmailInput onChange={onChange} value={form.email} name={'email'}/>
+                        </div>
+                        <div className={styles.row}><PasswordInput onChange={onChange} value={form.pass} name={'pass'}/>
+                        </div>
+                        {!isEqual() && <div className={styles.buttons}>
+                            <Button type="secondary" size="large" onClick={revert}>
+                                Отмена
+                            </Button>
+                            <Button type="primary" size="large" onClick={save}>
+                                Сохранить
+                            </Button>
+                        </div>}
                     </div>
                 </>}
             </div>
