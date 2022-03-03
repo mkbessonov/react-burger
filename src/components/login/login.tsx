@@ -17,7 +17,7 @@ export const Login = () => {
         e => {
             e.preventDefault();
             auth.signIn(() => {
-                history.replace({pathname: '/'});
+                history.replace({pathname: '/ingredients'});
             }, form.email, form.pass);
         },
         [auth, history, form]

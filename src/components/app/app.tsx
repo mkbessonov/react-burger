@@ -2,7 +2,7 @@ import React from 'react';
 import {AppHeader} from "../app-header/app-header";
 import {Main} from "../main/main";
 import {Provider} from "react-redux";
-import {store} from "../../store/store";
+import {persistor, store} from "../../store/store";
 import {initConstructor} from "../../store/actions/constructor-elements";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {DndProvider} from "react-dnd";
@@ -17,40 +17,43 @@ import {ProtectedRoute} from "../protected-route/protected-route";
 import {NotAuthRote} from "../not-auth-route/not-auth-route";
 import {IngredientDetails} from "../ingredient-details/ingredient-details";
 import {Modal} from "../modal/modal";
+import {PersistGate} from "redux-persist/integration/react";
 
 
 function App() {
     initConstructor()(store.dispatch);
 
     return (
-        <Provider store={store}>
-            <ProvideAuth>
-                <BrowserRouter>
-                    <AppHeader/>
-                    <Switch>
-                        <NotAuthRote path='/register'><Register/></NotAuthRote>
-                        <NotAuthRote path='/login'><Login/></NotAuthRote>
-                        <NotAuthRote path='/forgot-password'><ForgotPassword/></NotAuthRote>
-                        <NotAuthRote path='/reset-password'><ResetPassword/></NotAuthRote>
-                        <ProtectedRoute path='/profile'><Profile/></ProtectedRoute>
-                        <Route path={"/ingredients/:id"}><>
-                            <DndProvider backend={HTML5Backend}>
-                                <Main/>
-                            </DndProvider>
-                            <Modal width={720} >
-                                <IngredientDetails/>
-                            </Modal>
-                        </>
-                        </Route>
-                        <Route path={"/ingredients"}>
-                            <DndProvider backend={HTML5Backend}>
-                                <Main/>
-                            </DndProvider>
-                        </Route>
-                    </Switch>
-                </BrowserRouter>
-            </ProvideAuth>
-        </Provider>
+        <PersistGate loading={null} persistor={persistor}>
+            <Provider store={store}>
+                <ProvideAuth>
+                    <BrowserRouter>
+                        <AppHeader/>
+                        <Switch>
+                            <NotAuthRote path='/register'><Register/></NotAuthRote>
+                            <NotAuthRote path='/login'><Login/></NotAuthRote>
+                            <NotAuthRote path='/forgot-password'><ForgotPassword/></NotAuthRote>
+                            <NotAuthRote path='/reset-password'><ResetPassword/></NotAuthRote>
+                            <ProtectedRoute path='/profile'><Profile/></ProtectedRoute>
+                            <Route path={"/ingredients/:id"}><>
+                                <DndProvider backend={HTML5Backend}>
+                                    <Main/>
+                                </DndProvider>
+                                <Modal width={720}>
+                                    <IngredientDetails/>
+                                </Modal>
+                            </>
+                            </Route>
+                            <Route path={"/ingredients"}>
+                                <DndProvider backend={HTML5Backend}>
+                                    <Main/>
+                                </DndProvider>
+                            </Route>
+                        </Switch>
+                    </BrowserRouter>
+                </ProvideAuth>
+            </Provider>
+        </PersistGate>
     );
 }
 

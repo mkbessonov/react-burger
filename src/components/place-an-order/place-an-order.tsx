@@ -6,6 +6,8 @@ import {OrderDetails} from "../order-details/order-details";
 import {Modal} from "../modal/modal";
 import {getOrder} from "../../store/actions/order-details";
 import {Ingredient} from "../../store/actions/types";
+import {useAuth} from "../../service/auth";
+import {useHistory} from "react-router";
 
 interface IPlaceAnOrderProps {
     ingredients: Ingredient[];
@@ -15,6 +17,8 @@ interface IPlaceAnOrderProps {
 const PlaceAnOrder = (props: IPlaceAnOrderProps) => {
     const {ingredients, getOrder} = props;
     const [open, setOpen] = useState<boolean>(false);
+    let {getAndSetUser, ...auth} = useAuth();
+    const history = useHistory();
     const sum = useMemo(() => {
         let newSum = 0;
         ingredients.forEach((elem) => {
@@ -22,6 +26,14 @@ const PlaceAnOrder = (props: IPlaceAnOrderProps) => {
         });
         return newSum
     }, [ingredients]);
+    const onClick = () =>{
+        if (auth.user.user){
+            getOrder(ingredients.map(elem => elem._id));
+            setOpen(true);
+        } else {
+            history.replace('/login');
+        }
+    };
     if (ingredients.length > 0) {
         return (
             <div className={styles.footer}>
@@ -29,10 +41,7 @@ const PlaceAnOrder = (props: IPlaceAnOrderProps) => {
                     <p className="text text_type_digits-medium">{sum}</p>
                     <CurrencyIcon type="primary"/>
                 </div>
-                <Button type="primary" size="medium" onClick={() => {
-                    getOrder(ingredients.map(elem => elem._id));
-                    setOpen(true)
-                }}>
+                <Button type="primary" size="medium" onClick={onClick}>
                     Оформить заказ
                 </Button>
                 {open && <Modal width={720} handleClose={() => {
