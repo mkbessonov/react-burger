@@ -4,7 +4,11 @@ import {useLocation} from "react-router-dom";
 import {getIngredients} from "../../service/ingredients-service";
 import {useEffect, useState} from "react";
 
-export const IngredientDetails = () => {
+interface IIngredientDetailsProps {
+    page?: boolean;
+}
+
+export const IngredientDetails = (props: IIngredientDetailsProps) => {
     const location = useLocation();
     const path = location.pathname.split('/');
     const id = path[path.length - 1];
@@ -37,7 +41,9 @@ export const IngredientDetails = () => {
 
     return (
         <div className={styles.ingredient_content}>
-            <div className="text text_type_main-large">Детали ингредиента</div>
+            <div className="text text_type_main-large"
+                 style={props.page ? {textAlign: "center"} : {textAlign: "left"}}>Детали ингредиента
+            </div>
             <div className={styles.ingredient_img}><img src={ingredientInfo.image_large} height='240px'
                                                         alt={ingredientInfo.name}/></div>
             <p className={'text text_type_main-medium ' + styles.ingredient_name}>

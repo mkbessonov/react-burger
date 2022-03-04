@@ -11,7 +11,7 @@ export const Register = () => {
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue({...form, [e.target.name]: e.target.value});
     };
-    const onClick = (e:  FormEvent<HTMLFormElement>) => {
+    const onClick = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         register(form.email, form.pass, form.name).then((data) => {
             data.data.success && history.replace({pathname: '/login'});
@@ -20,26 +20,28 @@ export const Register = () => {
         });
     };
 
-    return <main className={styles.content}>
-        <form className={styles.container} onSubmit={onClick}>
-            <p className={"text text_type_main-medium " + styles.text}>Регистрация</p>
-            <div className={styles.row}><Input
-                type={'text'}
-                name={'name'}
-                placeholder={'Имя'}
-                error={false}
-                onChange={onChange} value={form.name}/></div>
-            <div className={styles.row}><EmailInput onChange={onChange} name={'email'} value={form.email}/></div>
-            <div className={styles.row}><PasswordInput onChange={onChange} name={'pass'} value={form.pass}/></div>
-            <div className={styles.center}>
-                <Button type="primary" size="large" htmlType='submit'>
-                    Зарегистрироваться
-                </Button>
-            </div>
-            <div>
-                <p className={"text text_type_main-default text_color_inactive " + styles.text_bottom}>Уже
-                    зарегистрированы? <Link to={'/login'}>Войти</Link></p>
-            </div>
-        </form>
-    </main>;
+    return (
+        <main className={styles.content}>
+            <form className={styles.container} onSubmit={onClick}>
+                <p className={"text text_type_main-medium " + styles.text}>Регистрация</p>
+                <div className={styles.row}><Input
+                    type={'text'}
+                    name={'name'}
+                    placeholder={'Имя'}
+                    error={false}
+                    onChange={onChange} value={form.name}/></div>
+                <div className={styles.row}><EmailInput onChange={onChange} name={'email'} value={form.email}/></div>
+                <div className={styles.row}><PasswordInput onChange={onChange} name={'pass'} value={form.pass}/></div>
+                <div className={styles.center}>
+                    <Button type="primary" size="large" htmlType='submit'>
+                        Зарегистрироваться
+                    </Button>
+                </div>
+                <div>
+                    <p className={"text text_type_main-default text_color_inactive " + styles.text_bottom}>Уже
+                        зарегистрированы? <Link to={'/login'}>Войти</Link></p>
+                </div>
+            </form>
+        </main>
+    );
 }

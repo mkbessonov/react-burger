@@ -17,7 +17,7 @@ interface IPlaceAnOrderProps {
 const PlaceAnOrder = (props: IPlaceAnOrderProps) => {
     const {ingredients, getOrder} = props;
     const [open, setOpen] = useState<boolean>(false);
-    let {getAndSetUser, ...auth} = useAuth();
+    const {getAndSetUser, ...auth} = useAuth();
     const history = useHistory();
     const sum = useMemo(() => {
         let newSum = 0;

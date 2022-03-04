@@ -39,7 +39,7 @@ const store = createStore(persistedReducer,
 export type IRootState = ReturnType<typeof listApp>;
 
 
-let persistor = persistStore(store as any);
+const persistor = persistStore(store as any);
 
 export {
     store,

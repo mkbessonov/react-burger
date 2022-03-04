@@ -9,7 +9,7 @@ interface INotAuthRoteProps extends RouteProps {
 }
 
 export const NotAuthRote = (props: INotAuthRoteProps) => {
-    let {getAndSetUser, ...auth} = useAuth();
+    const {getAndSetUser, ...auth} = useAuth();
     const [isUserLoaded, setUserLoaded] = useState(false);
     const history = useHistory();
 

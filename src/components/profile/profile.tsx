@@ -38,45 +38,50 @@ export const Profile = () => {
     const isEqual = () => {
         return form.email === oldForm.email && form.name === oldForm.name && form.pass === oldForm.pass;
     };
-    return <main className={styles.content}>
-        <div className={styles.container}>
-            <div className={styles.left_panel}>
-                <NavLink to={'/profile'} exact={true} onClick={() => setCurrentContent(CONTENT.PROFILE)}
-                         className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}
-                         activeClassName={styles.active_button}>Профиль</NavLink>
-                <NavLink to={'/profile/orders'} onClick={() => setCurrentContent(CONTENT.ORDER)}
-                         className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}
-                         activeClassName={styles.active_button}>История заказов</NavLink>
-                <div
-                         onClick={() => {
-                             dispatch(signOutAction())
-                         }}
-                         className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}>Выход</div>
-            </div>
-            <div className={styles.right_panel}>
-                {currentContent === CONTENT.PROFILE && <>
-                    <div>
-                        <div className={styles.row}><Input
-                            type={'text'}
-                            name={'name'}
-                            placeholder={'Имя'}
-                            error={false}
-                            onChange={onChange} value={form.name}/></div>
-                        <div className={styles.row}><EmailInput onChange={onChange} value={form.email} name={'email'}/>
-                        </div>
-                        <div className={styles.row}><PasswordInput onChange={onChange} value={form.pass} name={'pass'}/>
-                        </div>
-                        {!isEqual() && <div className={styles.buttons}>
-                            <Button type="secondary" size="large" onClick={revert}>
-                                Отмена
-                            </Button>
-                            <Button type="primary" size="large" onClick={save}>
-                                Сохранить
-                            </Button>
-                        </div>}
+    return (
+        <main className={styles.content}>
+            <div className={styles.container}>
+                <div className={styles.left_panel}>
+                    <NavLink to={'/profile'} exact={true} onClick={() => setCurrentContent(CONTENT.PROFILE)}
+                             className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}
+                             activeClassName={styles.active_button}>Профиль</NavLink>
+                    <NavLink to={'/profile/orders'} onClick={() => setCurrentContent(CONTENT.ORDER)}
+                             className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}
+                             activeClassName={styles.active_button}>История заказов</NavLink>
+                    <div
+                        onClick={() => {
+                            dispatch(signOutAction())
+                        }}
+                        className={"text text_type_main-medium text_color_inactive " + styles.left_panel_button}>Выход
                     </div>
-                </>}
+                </div>
+                <div className={styles.right_panel}>
+                    {currentContent === CONTENT.PROFILE && <>
+                        <div>
+                            <div className={styles.row}><Input
+                                type={'text'}
+                                name={'name'}
+                                placeholder={'Имя'}
+                                error={false}
+                                onChange={onChange} value={form.name}/></div>
+                            <div className={styles.row}><EmailInput onChange={onChange} value={form.email}
+                                                                    name={'email'}/>
+                            </div>
+                            <div className={styles.row}><PasswordInput onChange={onChange} value={form.pass}
+                                                                       name={'pass'}/>
+                            </div>
+                            {!isEqual() && <div className={styles.buttons}>
+                                <Button type="secondary" size="large" onClick={revert}>
+                                    Отмена
+                                </Button>
+                                <Button type="primary" size="large" onClick={save}>
+                                    Сохранить
+                                </Button>
+                            </div>}
+                        </div>
+                    </>}
+                </div>
             </div>
-        </div>
-    </main>;
+        </main>
+    );
 }

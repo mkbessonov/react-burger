@@ -9,12 +9,13 @@ export const ForgotPassword = () => {
     const history = useHistory();
     const [email, setEmail] = useState<string>('');
     const onClick = useCallback(
-        () => {
-            forgotPassword(email).then((data)=>{
+        (e) => {
+            e.preventDefault();
+            forgotPassword(email).then((data) => {
                 const result = data.data;
                 result.success && localStorage.setItem('forgotSuccessful', 'true');
-                result.success && history.replace({ pathname: '/reset-password' });
-            }).catch(()=>{
+                result.success && history.replace({pathname: '/reset-password'});
+            }).catch(() => {
                 alert('Произошла ошибка');
             });
         },
@@ -23,18 +24,22 @@ export const ForgotPassword = () => {
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
     };
-    return <main className={styles.content}>
-        <form className={styles.container} onSubmit={onClick}>
-            <p className={"text text_type_main-medium " + styles.text}>Восстановление пароля</p>
-            <div className={styles.row}><EmailInput onChange={onChange} value={email} name={'Укажите e-mail'}/></div>
-            <div className={styles.center}>
-                <Button type="primary" size="large" htmlType='submit'>
-                   Восстановить
-                </Button>
-            </div>
-            <div>
-                <p className={"text text_type_main-default text_color_inactive " + styles.text_bottom}>Вспомнили пароль? <Link to={'/login'}>Войти</Link></p>
-            </div>
-        </form>
-    </main>;
+    return (
+        <main className={styles.content}>
+            <form className={styles.container} onSubmit={onClick}>
+                <p className={"text text_type_main-medium " + styles.text}>Восстановление пароля</p>
+                <div className={styles.row}><EmailInput onChange={onChange} value={email} name={'Укажите e-mail'}/>
+                </div>
+                <div className={styles.center}>
+                    <Button type="primary" size="large" htmlType='submit'>
+                        Восстановить
+                    </Button>
+                </div>
+                <div>
+                    <p className={"text text_type_main-default text_color_inactive " + styles.text_bottom}>Вспомнили
+                        пароль? <Link to={'/login'}>Войти</Link></p>
+                </div>
+            </form>
+        </main>
+    );
 }

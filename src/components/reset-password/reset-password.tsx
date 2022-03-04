@@ -19,31 +19,33 @@ export const ResetPassword = () => {
             alert('Произошла ошибка');
         });
     };
-    return <main className={styles.content}>
-        <form className={styles.container} onSubmit={onClick}>
-            <p className={"text text_type_main-medium " + styles.text}>Восстановление пароля</p>
-            <div className={styles.row}><Input
-                type={'text'}
-                placeholder={'Введите новый пароль'}
-                error={false}
-                icon={'ShowIcon'}
-                name={'pass'}
-                onChange={onChange} value={form.pass}/></div>
-            <div className={styles.row}><Input
-                type={'text'}
-                placeholder={'Введите код из письма'}
-                error={false}
-                name={'token'}
-                onChange={onChange} value={form.token}/></div>
-            <div className={styles.center}>
-                <Button type="primary" size="large" htmlType='submit'>
-                    Сохранить
-                </Button>
-            </div>
-            <div>
-                <p className={"text text_type_main-default text_color_inactive " + styles.text_bottom}>Вспомнили
-                    пароль? <Link to='/login'>Войти</Link></p>
-            </div>
-        </form>
-    </main>;
+    return (
+        <main className={styles.content}>
+            <form className={styles.container} onSubmit={onClick}>
+                <p className={"text text_type_main-medium " + styles.text}>Восстановление пароля</p>
+                <div className={styles.row}><Input
+                    type={'text'}
+                    placeholder={'Введите новый пароль'}
+                    error={false}
+                    icon={'ShowIcon'}
+                    name={'pass'}
+                    onChange={onChange} value={form.pass}/></div>
+                <div className={styles.row}><Input
+                    type={'text'}
+                    placeholder={'Введите код из письма'}
+                    error={false}
+                    name={'token'}
+                    onChange={onChange} value={form.token}/></div>
+                <div className={styles.center}>
+                    <Button type="primary" size="large" htmlType='submit'>
+                        Сохранить
+                    </Button>
+                </div>
+                <div>
+                    <p className={"text text_type_main-default text_color_inactive " + styles.text_bottom}>Вспомнили
+                        пароль? <Link to='/login'>Войти</Link></p>
+                </div>
+            </form>
+        </main>
+    );
 }

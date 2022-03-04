@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {Ingredient} from "../../store/actions/types";
 import {clearIngredientInfo, setIngredientInfo} from "../../store/actions/ingredient-info";
 import {useDrag} from "react-dnd";
-import {useHistory} from "react-router";
+import {useHistory, useLocation} from "react-router";
 
 interface ICardProps {
     ingredients: Ingredient[],
@@ -20,11 +20,12 @@ const Card = (props: ICardProps) => {
         setIngredientInfo,
     } = props;
     const history = useHistory();
+    let location = useLocation();
 
 
     const handleOpen = () => {
         setIngredientInfo(ingredient);
-        history.replace('/ingredients/' + ingredient._id);
+        history.replace('/ingredients/' + ingredient._id, {background: location});
     };
 
     const [, drag] = useDrag({

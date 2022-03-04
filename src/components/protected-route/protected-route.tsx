@@ -8,7 +8,7 @@ interface IProtectedRouteProps extends RouteProps {
 }
 
 export const ProtectedRoute = (props: IProtectedRouteProps) => {
-    let {getAndSetUser, ...auth} = useAuth();
+    const {getAndSetUser, ...auth} = useAuth();
     const {...rest} = props;
     const [isUserLoaded, setUserLoaded] = useState(false);
 
