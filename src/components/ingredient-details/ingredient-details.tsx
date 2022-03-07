@@ -1,8 +1,9 @@
-import {ETypesIngredient, Ingredient} from "../../store/actions/types";
+import {Ingredient} from "../../store/actions/types";
 import styles from './ingredient-details.module.css'
 import {useLocation} from "react-router-dom";
-import {getIngredients} from "../../service/ingredients-service";
-import {useEffect, useState} from "react";
+import {useMemo} from "react";
+import {useSelector} from "react-redux";
+import {IRootState} from "../../store/store";
 
 interface IIngredientDetailsProps {
     page?: boolean;
@@ -12,32 +13,9 @@ export const IngredientDetails = (props: IIngredientDetailsProps) => {
     const location = useLocation();
     const path = location.pathname.split('/');
     const id = path[path.length - 1];
-    const [ingredientInfo, setIngredientInfo] = useState<Ingredient>({
-        __v: 0,
-        _id: "",
-        calories: 0,
-        carbohydrates: 0,
-        fat: 0,
-        image: "",
-        image_large: "",
-        image_mobile: "",
-        name: "",
-        price: 0,
-        proteins: 0,
-        type: ETypesIngredient.BUN
-    });
-    useEffect(() => {
-        getIngredients().then((result) => {
-            if (result.data.success) {
-                const ingredients = result.data.data;
-                setIngredientInfo(ingredients.filter((elem: Ingredient) => (elem._id === id))[0] || null);
-            } else {
-                alert('Неизвестная ошибка')
-            }
-        }).catch(() => {
-            alert('Ошибка');
-        })
-    }, []);
+
+    const constructorElements = useSelector((state: IRootState) => state.constructorElements);
+    const ingredientInfo = useMemo(()=>(constructorElements.ingredients.filter((elem: Ingredient) => (elem._id === id))[0] || null), [constructorElements])
 
     return (
         <div className={styles.ingredient_content}>

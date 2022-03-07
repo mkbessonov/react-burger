@@ -20,7 +20,7 @@ const Card = (props: ICardProps) => {
         setIngredientInfo,
     } = props;
     const history = useHistory();
-    let location = useLocation();
+    const location = useLocation();
 
 
     const handleOpen = () => {

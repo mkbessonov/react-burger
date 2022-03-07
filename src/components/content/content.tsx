@@ -10,13 +10,20 @@ import {Modal} from "../modal/modal";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {Main} from "../../pages/main/main";
-import React from "react";
+import React, {useEffect} from "react";
 import {IngredientDetails} from "../ingredient-details/ingredient-details";
 import {PageIngredientsDetails} from "../../pages/page-ingredients-details/page-ingradients-details";
+import {initConstructor} from "../../store/actions/constructor-elements";
+import {useDispatch} from "react-redux";
 
 export const Content = () => {
-    let location = useLocation();
-    let background = location.state && (location.state as any).background;
+    const location = useLocation();
+    const background = location.state && (location.state as any).background;
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(initConstructor())
+    }, [dispatch]);
     return (
         <>
             <Switch location={background || location}>
