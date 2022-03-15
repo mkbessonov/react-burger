@@ -1,8 +1,0 @@
-.center {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-}
-.center .text.text_type_main-large{
-    text-align: center;
-}
