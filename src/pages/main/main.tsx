@@ -1,7 +1,7 @@
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
+import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 import styles from './main.module.css'
-import PlaceAnOrder from "../place-an-order/place-an-order";
+import PlaceAnOrder from "../../components/place-an-order/place-an-order";
 import {useDrop} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
 import {addIngredient, setIngredient} from "../../store/actions/ingredients";

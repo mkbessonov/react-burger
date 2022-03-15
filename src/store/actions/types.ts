@@ -12,7 +12,10 @@ export enum ETypesAction {
     SET_INGREDIENT = "SET_INGREDIENT",
     GET_ORDER = "GET_ORDER",
     GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS",
-    GET_ORDER_ERROR = "GET_ORDER_ERROR"
+    GET_ORDER_ERROR = "GET_ORDER_ERROR",
+    LOGIN = "LOGIN",
+    LOGIN_SUCCESS = "LOGIN_SUCCESS",
+    LOGIN_ERROR = "LOGIN_ERROR"
 }
 
 export interface ConstructorElementsActionType {
@@ -24,6 +27,10 @@ export interface ConstructorElementsActionType {
 export interface IngredientInfoActionType {
     type: ETypesAction,
     ingredient?: Ingredient
+}
+export interface UserActionType {
+    type: ETypesAction,
+    user?: User
 }
 
 export enum ETypesIngredient {
@@ -71,4 +78,9 @@ export interface Order {
     },
     failed: boolean,
     request: boolean
+}
+
+export interface User {
+    email: string,
+    name: string
 }

@@ -1,16 +1,27 @@
 import {Ingredient} from "../../store/actions/types";
 import styles from './ingredient-details.module.css'
-import {connect} from "react-redux";
+import {useLocation} from "react-router-dom";
+import {useMemo} from "react";
+import {useSelector} from "react-redux";
+import {IRootState} from "../../store/store";
 
 interface IIngredientDetailsProps {
-    ingredientInfo: Ingredient
+    page?: boolean;
 }
 
-const IngredientDetails = (props: IIngredientDetailsProps) => {
-    const {ingredientInfo} = props;
+export const IngredientDetails = (props: IIngredientDetailsProps) => {
+    const location = useLocation();
+    const path = location.pathname.split('/');
+    const id = path[path.length - 1];
+
+    const constructorElements = useSelector((state: IRootState) => state.constructorElements);
+    const ingredientInfo = useMemo(()=>(constructorElements.ingredients.filter((elem: Ingredient) => (elem._id === id))[0] || null), [constructorElements])
+
     return (
-        ingredientInfo && <div className={styles.ingredient_content}>
-            <div className="text text_type_main-large">Детали ингредиента</div>
+        <div className={styles.ingredient_content}>
+            <div className="text text_type_main-large"
+                 style={props.page ? {textAlign: "center"} : {textAlign: "left"}}>Детали ингредиента
+            </div>
             <div className={styles.ingredient_img}><img src={ingredientInfo.image_large} height='240px'
                                                         alt={ingredientInfo.name}/></div>
             <p className={'text text_type_main-medium ' + styles.ingredient_name}>
@@ -38,11 +49,3 @@ const IngredientDetails = (props: IIngredientDetailsProps) => {
     );
 };
 
-const mapStateToProps = (state: IIngredientDetailsProps) => ({
-    ingredientInfo: state.ingredientInfo
-});
-
-export default connect(
-    mapStateToProps,
-    {}
-)(IngredientDetails);

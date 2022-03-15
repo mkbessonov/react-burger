@@ -2,17 +2,14 @@ import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-com
 import styles from './card.module.css'
 import {connect} from "react-redux";
 import {Ingredient} from "../../store/actions/types";
-import {useState} from "react";
-import IngredientDetails from "../ingredient-details/ingredient-details";
-import {Modal} from '../modal/modal';
 import {clearIngredientInfo, setIngredientInfo} from "../../store/actions/ingredient-info";
 import {useDrag} from "react-dnd";
+import {useHistory, useLocation} from "react-router";
 
 interface ICardProps {
     ingredients: Ingredient[],
     ingredient: Ingredient,
     index: number,
-    clearIngredientInfo: typeof clearIngredientInfo,
     setIngredientInfo: typeof setIngredientInfo
 }
 
@@ -21,19 +18,14 @@ const Card = (props: ICardProps) => {
         ingredient,
         index,
         setIngredientInfo,
-        clearIngredientInfo
     } = props;
+    const history = useHistory();
+    const location = useLocation();
 
-    const [open, setOpen] = useState<boolean>(false);
 
     const handleOpen = () => {
         setIngredientInfo(ingredient);
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-        clearIngredientInfo()
+        history.replace('/ingredients/' + ingredient._id, {background: location});
     };
 
     const [, drag] = useDrag({
@@ -43,8 +35,9 @@ const Card = (props: ICardProps) => {
 
     return (
         <>
-            <div className={styles.card} draggable style={index % 2 === 0 ? {} : {padding: 0}} ref={drag} onClick={handleOpen}>
-                {ingredient.count && <Counter count={ingredient.count} size="small" />}
+            <div className={styles.card} draggable style={index % 2 === 0 ? {} : {padding: 0}} ref={drag}
+                 onClick={handleOpen}>
+                {ingredient.count && <Counter count={ingredient.count} size="small"/>}
                 <img src={ingredient.image}
                      className={styles.img_product}
                      draggable={false}
@@ -59,11 +52,6 @@ const Card = (props: ICardProps) => {
                 </div>
 
             </div>
-            {
-                open && <Modal width={720} handleClose={handleClose}>
-                    <IngredientDetails/>
-                </Modal>
-            }
         </>
     );
 };
