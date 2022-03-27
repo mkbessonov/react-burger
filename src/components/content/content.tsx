@@ -15,6 +15,8 @@ import {IngredientDetails} from "../ingredient-details/ingredient-details";
 import {PageIngredientsDetails} from "../../pages/page-ingredients-details/page-ingradients-details";
 import {initConstructor} from "../../store/actions/constructor-elements";
 import {useDispatch} from "react-redux";
+import {AllOrders} from "../../pages/all-orders/all-orders";
+import {OrderFeed} from "../../pages/order-feed/order-feed";
 
 export const Content = () => {
     const location = useLocation();
@@ -32,6 +34,8 @@ export const Content = () => {
                 <NotAuthRote path='/forgot-password'><ForgotPassword/></NotAuthRote>
                 <NotAuthRote path='/reset-password'><ResetPassword/></NotAuthRote>
                 <ProtectedRoute path='/profile'><Profile/></ProtectedRoute>
+                <ProtectedRoute path='/profile/orders'><OrderFeed/></ProtectedRoute>
+                <Route path='/feed'><AllOrders/></Route>
                 <Route path="/ingredients/:id" children={
                     <PageIngredientsDetails/>
                 }/>
