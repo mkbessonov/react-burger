@@ -6,6 +6,7 @@ import {setUser, signOutAction} from "../../store/actions/user";
 import {useDispatch, useSelector} from "react-redux";
 import {IRootState} from "../../store/store";
 import {updateUser} from "../../service/user";
+import {UserOrder} from "../user-order/user-order";
 
 enum CONTENT {
     PROFILE = 'PROFILE',
@@ -80,6 +81,7 @@ export const Profile = () => {
                             </div>}
                         </div>
                     </>}
+                    {currentContent === CONTENT.ORDER && <UserOrder/>}
                 </div>
             </div>
         </main>

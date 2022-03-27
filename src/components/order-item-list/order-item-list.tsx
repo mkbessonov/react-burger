@@ -6,6 +6,7 @@ import styles from './order-item-list.module.css'
 import moment from "moment";
 import "moment/locale/ru";
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {useLocation} from "react-router-dom";
 
 interface IOrderItemListProps {
     order: IOrderInfo
@@ -13,6 +14,7 @@ interface IOrderItemListProps {
 
 export const OrderItemList = (props: IOrderItemListProps) => {
     const {order} = props;
+    const location = useLocation();
     const {ingredients} = useSelector((state: IRootState) => state.constructorElements);
     const ingredientsImg = useMemo(() => {
         const images: string[] = [];
@@ -42,6 +44,7 @@ export const OrderItemList = (props: IOrderItemListProps) => {
             }
         }
     }, 0), []);
+    const status: string = order.status === "created" ? "Создан" : order.status === "pending" ? "Готовится" : order.status === "done" ? "Выполнен" : "";
     return (<div className={styles.list_item}>
             <div className={styles.row}>
                 <p className="text text_type_digits-default">#{order.number}</p>
@@ -50,6 +53,12 @@ export const OrderItemList = (props: IOrderItemListProps) => {
                 </p>
             </div>
             <div className={"text text_type_main-medium mt-6"}>{order.name}</div>
+            {location.pathname === "/profile/orders" && (
+                <p className={`text text_type_main-default mt-2`}
+                   style={order.status === "done" ? {color: "#00CCCC"} : {color: "#F2F2F3"}}>
+                    {status}
+                </p>
+            )}
             <div className={`${styles.row} mt-6`}>
                 <div className={styles.ingredients}>
                     {ingredientsImg &&

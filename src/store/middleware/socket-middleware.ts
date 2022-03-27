@@ -10,6 +10,7 @@ export const socketMiddleware = (): Middleware => {
             const { dispatch } = store;
             const { type, payload, wsUrl, token } = action;
             if (type === ETypesAction.WS_CONNECTION_START) {
+                console.log(1)
                 socket = token
                     ? new WebSocket(`${wsUrl}?token=${token}`)
                     : new WebSocket(`${wsUrl}`);
