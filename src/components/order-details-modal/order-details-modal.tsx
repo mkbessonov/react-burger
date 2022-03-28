@@ -40,10 +40,25 @@ export const OrderDetailsModal = () => {
                 return ingredients[i];
             }
         }
-    }, 0), []);
+    }, 0), [ingredients]);
 
     const status = currentOrder?.status === "created" ? "Создан" : currentOrder?.status === "pending" ? "Готовится" : "Выполнен";
-
+    const newIngredients = useMemo<any[]>(() => {
+        const set = new Set(currentOrder.ingredients);
+        const newArr: any[] = [];
+        set.forEach((item) => {
+            let count = 0;
+            let elem = {};
+            currentIngredients.forEach((ingredient: Ingredient) => {
+                if (item === ingredient._id) {
+                    count++;
+                    elem = ingredient;
+                }
+            });
+            newArr.push({count, elem});
+        })
+        return newArr;
+    }, [currentIngredients, currentOrder]);
     return (
         <>
             <div className={styles.container}>
@@ -60,18 +75,18 @@ export const OrderDetailsModal = () => {
                 <p className="text text_type_main-medium mb-6">Состав:</p>
                 <div className={`${styles.list} mb-15`}>
                     {
-                        currentIngredients.map((item) => (
+                        newIngredients.map((item) => (
                             <div className={`${styles.list_item} mb-4`}>
                                 <div className={styles.ingredient}>
                                     <div className={styles.ingredient_item}>
-                                        <img className={styles.img} src={item.image} alt={'ингредиент'}/>
+                                        <img className={styles.img} src={item.elem.image} alt={'ингредиент'}/>
                                     </div>
-                                    <h2 className="text text_type_main-default">{item.name}</h2>
+                                    <h2 className="text text_type_main-default">{item.elem.name}</h2>
                                 </div>
                                 <div className={styles.price}>
-                                    <p className={`text text_type_digits-default pr-2`}>{2} x </p>
+                                    <p className={`text text_type_digits-default pr-2`}>{item.count} x </p>
                                     <p className={`text text_type_digits-default pr-2`}>
-                                        {item.price}
+                                        {item.elem.price}
                                     </p>
                                     <CurrencyIcon type="primary"/>
                                 </div>
