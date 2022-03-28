@@ -16,15 +16,20 @@ import {PageIngredientsDetails} from "../../pages/page-ingredients-details/page-
 import {initConstructor} from "../../store/actions/constructor-elements";
 import {useDispatch} from "react-redux";
 import {AllOrders} from "../../pages/all-orders/all-orders";
+import {OrderDetailsModal} from "../order-details-modal/order-details-modal";
+import {useHistory} from "react-router";
 
 export const Content = () => {
     const location = useLocation();
     const background = location.state && (location.state as any).background;
     const dispatch = useDispatch()
-
+    const history = useHistory();
     useEffect(() => {
         dispatch(initConstructor())
     }, [dispatch]);
+    const handleCloseForOrderModal = () => {
+        history.replace({pathname: '/feed'});
+    };
     return (
         <>
             <Switch location={background || location}>
@@ -49,6 +54,11 @@ export const Content = () => {
             {background && <Route path="/ingredients/:id" children={
                 <Modal width={720}>
                     <IngredientDetails/>
+                </Modal>
+            }/>}
+            {background && <Route path="/feed/:id" children={
+                <Modal width={720} handleClose={handleCloseForOrderModal}>
+                    <OrderDetailsModal/>
                 </Modal>
             }/>}
         </>

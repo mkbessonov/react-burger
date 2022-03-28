@@ -9,7 +9,7 @@ import {OrderItemList} from "../../components/order-item-list/order-item-list";
 import styles from './user-order.module.css'
 
 export const UserOrder = () => {
-    const { feeds }: TWSState = useSelector((state: IRootState) => state.wsReducer);
+    const { userFeeds }: TWSState = useSelector((state: IRootState) => state.wsReducer);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch({ type: ETypesAction.WS_CONNECTION_START, wsUrl: WS_USER_URL, token: getCookie('token') });
@@ -19,7 +19,7 @@ export const UserOrder = () => {
     }, [dispatch]);
     return (
         <main className={styles.main}>
-            {feeds.orders.map((item: IOrderInfo) => (<OrderItemList key={item._id} order={item}/>))}
+            {userFeeds.orders.map((item: IOrderInfo) => (<OrderItemList key={item._id} order={item}/>))}
         </main>
     );
 };

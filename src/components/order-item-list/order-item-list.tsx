@@ -7,6 +7,7 @@ import moment from "moment";
 import "moment/locale/ru";
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useLocation} from "react-router-dom";
+import {useHistory} from "react-router";
 
 interface IOrderItemListProps {
     order: IOrderInfo
@@ -45,7 +46,11 @@ export const OrderItemList = (props: IOrderItemListProps) => {
         }
     }, 0), []);
     const status: string = order.status === "created" ? "Создан" : order.status === "pending" ? "Готовится" : order.status === "done" ? "Выполнен" : "";
-    return (<div className={styles.list_item}>
+    const history = useHistory();
+    const handleOpen = () => {
+        history.replace('/feed/' + order._id, {background: location});
+    };
+    return (<div className={styles.list_item} onClick={handleOpen}>
             <div className={styles.row}>
                 <p className="text text_type_digits-default">#{order.number}</p>
                 <p className="text text_type_main-default text_color_inactive">
