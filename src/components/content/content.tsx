@@ -18,6 +18,7 @@ import {useDispatch} from "react-redux";
 import {AllOrders} from "../../pages/all-orders/all-orders";
 import {OrderDetailsModal} from "../order-details-modal/order-details-modal";
 import {useHistory} from "react-router";
+import {PageOrderDetails} from "../../pages/page-order-details-modal/page-order-details-modal";
 
 export const Content = () => {
     const location = useLocation();
@@ -28,7 +29,7 @@ export const Content = () => {
         dispatch(initConstructor())
     }, [dispatch]);
     const handleCloseForOrderModal = () => {
-        history.replace({pathname: '/feed'});
+        history.replace({pathname: location.pathname.includes("/profile/orders") ? '/profile/orders/' : '/feed/'});
     };
     return (
         <>
@@ -37,11 +38,14 @@ export const Content = () => {
                 <NotAuthRote path='/login'><Login/></NotAuthRote>
                 <NotAuthRote path='/forgot-password'><ForgotPassword/></NotAuthRote>
                 <NotAuthRote path='/reset-password'><ResetPassword/></NotAuthRote>
+                <Route path={["/feed/:id", "/profile/orders/:id"]} children={
+                    <PageOrderDetails/>
+                }/>
                 <ProtectedRoute path='/profile'><Profile/></ProtectedRoute>
-                <Route path='/feed'><AllOrders/></Route>
                 <Route path="/ingredients/:id" children={
                     <PageIngredientsDetails/>
                 }/>
+                <Route path='/feed'><AllOrders/></Route>
                 <Route path={"/ingredients"} exact={true}>
                     <DndProvider backend={HTML5Backend}>
                         <Main/>
@@ -56,7 +60,7 @@ export const Content = () => {
                     <IngredientDetails/>
                 </Modal>
             }/>}
-            {background && <Route path="/feed/:id" children={
+            {background && <Route path={["/feed/:id", "/profile/orders/:id"]} children={
                 <Modal width={720} handleClose={handleCloseForOrderModal}>
                     <OrderDetailsModal/>
                 </Modal>

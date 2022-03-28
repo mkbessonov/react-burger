@@ -48,7 +48,7 @@ export const OrderItemList = (props: IOrderItemListProps) => {
     const status: string = order.status === "created" ? "Создан" : order.status === "pending" ? "Готовится" : order.status === "done" ? "Выполнен" : "";
     const history = useHistory();
     const handleOpen = () => {
-        history.replace('/feed/' + order._id, {background: location});
+        history.replace((location.pathname.includes("/profile/orders") ? '/profile/orders/' : '/feed/') + order._id, {background: location});
     };
     return (<div className={styles.list_item} onClick={handleOpen}>
             <div className={styles.row}>
