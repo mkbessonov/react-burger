@@ -54,6 +54,12 @@ export const constructorElements = (state: IConstructorElements = {
                 ...state, ingredients: JSON.parse(JSON.stringify(state.ingredients))
             };
         }
+        case ETypesAction.CLEAR_COUNT: {
+            const newIngredients = state.ingredients.map((item) => ({...item, count: undefined}));
+            return {
+                ...state, ingredients: JSON.parse(JSON.stringify(newIngredients))
+            };
+        }
         default:
             return state;
     }

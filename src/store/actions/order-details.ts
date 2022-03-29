@@ -1,6 +1,8 @@
 import {ETypesAction, Order} from "./types";
 import {createOrder} from "../../service/order-service";
 import {AppDispatch, AppThunk} from "../store";
+import {clearBurger} from "./ingredients";
+import {clearCount} from "./constructor-elements";
 
 export const getOrder: AppThunk = (ingredients: string[]) => {
     return (dispatch: AppDispatch) => {
@@ -11,6 +13,8 @@ export const getOrder: AppThunk = (ingredients: string[]) => {
             if (result.data.success) {
                 const data = result.data;
                 dispatch(setOrder(data));
+                dispatch(clearBurger());
+                dispatch(clearCount());
             } else {
                 dispatch(setError());
                 alert('Неизвестная ошибка')

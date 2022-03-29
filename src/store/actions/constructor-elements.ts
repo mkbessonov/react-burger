@@ -42,3 +42,7 @@ export const increment = (id: string) => {
 export const decrement = (id: string) => {
     return {type: ETypesAction.DECREMENT, id};
 };
+
+export const clearCount = () => {
+    return {type: ETypesAction.CLEAR_COUNT};
+};

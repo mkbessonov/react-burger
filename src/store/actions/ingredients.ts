@@ -15,3 +15,7 @@ export const setIngredient = (ingredient: Ingredient, index: number) => {
 export const moveIngredient = (index: number, newIndex: number) => {
     return {type: ETypesAction.MOVE_INGREDIENT, index, newIndex};
 };
+
+export const clearBurger = () => {
+    return {type: ETypesAction.ClEAR_BURGER};
+};

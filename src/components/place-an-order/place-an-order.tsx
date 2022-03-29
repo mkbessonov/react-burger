@@ -26,31 +26,31 @@ const PlaceAnOrder = (props: IPlaceAnOrderProps) => {
         });
         return newSum
     }, [ingredients]);
-    const onClick = () =>{
-        if (auth.user.user){
+    const onClick = () => {
+        if (auth.user.user) {
             getOrder(ingredients.map(elem => elem._id));
             setOpen(true);
         } else {
             history.replace('/login');
         }
     };
-    if (ingredients.length > 0) {
-        return (
-            <div className={styles.footer}>
+
+    return (
+        <div className={styles.footer}>
+            {ingredients.length > 0 && <>
                 <div className={styles.sum}>
                     <p className="text text_type_digits-medium">{sum}</p>
                     <CurrencyIcon type="primary"/>
                 </div>
                 <Button type="primary" size="medium" onClick={onClick}>
                     Оформить заказ
-                </Button>
-                {open && <Modal width={720} handleClose={() => {
-                    setOpen(false)
-                }}><OrderDetails/></Modal>}
-            </div>
-        );
-    }
-    return null;
+                </Button></>}
+            {open && <Modal width={720} handleClose={() => {
+                setOpen(false)
+            }}><OrderDetails/></Modal>}
+        </div>
+    );
+
 };
 
 const mapStateToProps = (state: IPlaceAnOrderProps) => ({

@@ -12,7 +12,7 @@ export const AppHeader = () => {
                 <div className={styles.app_header_link_container}>
                     <Link icon={<BurgerIcon type="secondary"/>} text={'Конструктор'} onClick={()=>{history.replace('/ingredients')}}/>
                     <Link icon={<ListIcon type="secondary"/>} text={'Лента заказов'} onClick={()=>{history.replace('/feed')}}/>
-                    <div className={styles.logo}><Logo/></div>
+                    <div className={styles.logo} onClick={()=>{history.replace('/ingredients')}}><Logo/></div>
                     <Link icon={<ProfileIcon type="secondary"/>} text={'Личный кабинет'} onClick={()=>{history.replace('/profile')}}/>
                 </div>
             </nav>
