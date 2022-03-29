@@ -1,8 +1,9 @@
 import {ETypesAction, Order} from "./types";
 import {createOrder} from "../../service/order-service";
+import {AppDispatch, AppThunk} from "../store";
 
-export const getOrder = (ingredients: string[]) => {
-    return (dispatch: any) => {
+export const getOrder: AppThunk = (ingredients: string[]) => {
+    return (dispatch: AppDispatch) => {
         dispatch({
             type: ETypesAction.GET_ORDER
         })

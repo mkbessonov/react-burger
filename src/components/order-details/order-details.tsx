@@ -1,11 +1,10 @@
 import styles from './order-details.module.css'
 import React from "react";
-import {useSelector} from "react-redux";
-import {IRootState} from "../../store/store";
 import {Order} from "../../store/actions/types";
+import {useSelector} from "../../store/hooks";
 
 export const OrderDetails = () => {
-    const {orderDetails, request, failed}: Order = useSelector((state: IRootState) => state.orderDetails);
+    const {orderDetails, request, failed}: Order = useSelector((state) => state.orderDetails);
     if (failed) {
         return <p>Произошла ошибка при получении данных</p>
     } else if (request) {

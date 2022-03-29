@@ -63,15 +63,15 @@ const BurgerIngredients = (props: IBurgerIngredientsProps) => {
                 <div className={styles.ingredients_cards} ref={block} onScroll={handleScroll}>
                     <h2 className='text text_type_main-medium' ref={bunsRef}>Булки</h2>
                     <div className={styles.ingredients_block}>
-                        {ingredients.filter((elem: Ingredient) => elem.type === 'bun').map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
+                        {ingredients.filter((elem) => elem.type === 'bun').map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
                     </div>
                     <h2 className='text text_type_main-medium' ref={sauceRef}>Соусы</h2>
                     <div className={styles.ingredients_block}>
-                        {ingredients.filter((elem: Ingredient) => elem.type === 'sauce').map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
+                        {ingredients.filter((elem) => elem.type === 'sauce').map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
                     </div>
                     <h2 className='text text_type_main-medium' ref={mainRef}>Начинки</h2>
                     <div className={styles.ingredients_block}>
-                        {ingredients.filter((elem: Ingredient) => elem.type === 'main').map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
+                        {ingredients.filter((elem) => elem.type === 'main').map((elem: Ingredient, i) => <Card key={elem._id} ingredient={elem} index={i}/>)}
                     </div>
                 </div>
             </>

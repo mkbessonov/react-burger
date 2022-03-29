@@ -1,13 +1,12 @@
 import {Ingredient, IOrderInfo} from "../../store/actions/types";
 import React, {useMemo} from "react";
-import {useSelector} from "react-redux";
-import {IRootState} from "../../store/store";
 import styles from './order-item-list.module.css'
 import moment from "moment";
 import "moment/locale/ru";
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useLocation} from "react-router-dom";
 import {useHistory} from "react-router";
+import {useSelector} from "../../store/hooks";
 
 interface IOrderItemListProps {
     order: IOrderInfo
@@ -16,7 +15,7 @@ interface IOrderItemListProps {
 export const OrderItemList = (props: IOrderItemListProps) => {
     const {order} = props;
     const location = useLocation();
-    const {ingredients} = useSelector((state: IRootState) => state.constructorElements);
+    const {ingredients} = useSelector((state) => state.constructorElements);
     const ingredientsImg = useMemo(() => {
         const images: string[] = [];
         ingredients.forEach((item: Ingredient) => {
@@ -68,7 +67,7 @@ export const OrderItemList = (props: IOrderItemListProps) => {
                 <div className={styles.ingredients}>
                     {ingredientsImg &&
                     ingredientsImg.map(
-                        (item: string, index: number) =>
+                        (item, index) =>
                             index < 6 && (
                                 <div key={index} className={styles.ingredient_item}
                                      style={ingredientsImg.length > 6 ? {opacity: .5} : {}}>

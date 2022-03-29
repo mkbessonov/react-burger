@@ -1,25 +1,23 @@
-import React, { useMemo } from "react";
+import React, {useMemo} from "react";
 import styles from "./order-info.module.css";
-import {IRootState} from "../../store/store";
 import {TWSState} from "../../store/reducers/ws-reducer";
-import {useSelector} from "react-redux";
-import {IOrderInfo} from "../../store/actions/types";
+import {useSelector} from "../../store/hooks";
 
 export const OrderInfo = () => {
-    const { feeds }: TWSState = useSelector((state:IRootState) => state.wsReducer);
+    const { feeds }: TWSState = useSelector((state) => state.wsReducer);
 
     const doneItems = useMemo<Array<number>>(() => {
         return feeds?.orders
-            .filter((item: IOrderInfo) => item.status === "done")
-            .map((item: IOrderInfo) => {
+            .filter((item) => item.status === "done")
+            .map((item) => {
                 return item.number;
             });
     }, [feeds]);
 
     const createdItems = useMemo<Array<number>>(() => {
         return feeds?.orders
-            .filter((item: IOrderInfo) => item.status === "created")
-            .map((item: IOrderInfo) => {
+            .filter((item) => item.status === "created")
+            .map((item) => {
                 return item.number;
             });
     }, [feeds]);
@@ -30,7 +28,7 @@ export const OrderInfo = () => {
                 <div className={styles.row}>
                     <p className="text text_type_main-medium mb-5">Готовы:</p>
                     <div className={styles.orders}>
-                        {doneItems.map((item: number, index: number) => (
+                        {doneItems.map((item, index) => (
                             <p
                                 className={`${styles.done_number} text text_type_digits-default mb-2 mr-5`}
                                 key={index}
@@ -43,7 +41,7 @@ export const OrderInfo = () => {
                 <div className={styles.row}>
                     <p className="text text_type_main-medium  mb-5">В работе:</p>
                     <div className={styles.orders}>
-                        {createdItems.map((item: number, index: number) => (
+                        {createdItems.map((item, index) => (
                             <p
                                 className={'text text_type_digits-default mb-2 mr-5'}
                                 key={index}

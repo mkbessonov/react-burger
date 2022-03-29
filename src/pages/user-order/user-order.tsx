@@ -1,15 +1,14 @@
 import React, {useEffect} from "react";
 import {TWSState} from "../../store/reducers/ws-reducer";
-import {useDispatch, useSelector} from "react-redux";
-import {IRootState} from "../../store/store";
 import {WS_USER_URL} from "../../service/api";
-import {ETypesAction, IOrderInfo} from "../../store/actions/types";
+import {ETypesAction} from "../../store/actions/types";
 import {getCookie} from "../../utils";
 import {OrderItemList} from "../../components/order-item-list/order-item-list";
 import styles from './user-order.module.css'
+import {useDispatch, useSelector} from "../../store/hooks";
 
 export const UserOrder = () => {
-    const { feeds }: TWSState = useSelector((state: IRootState) => state.wsReducer);
+    const { userFeeds }: TWSState = useSelector((state) => state.wsReducer);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch({ type: ETypesAction.WS_CONNECTION_START, wsUrl: WS_USER_URL, token: getCookie('token') });
@@ -19,7 +18,7 @@ export const UserOrder = () => {
     }, [dispatch]);
     return (
         <main className={styles.main}>
-            {feeds.orders.map((item: IOrderInfo) => (<OrderItemList key={item._id} order={item}/>))}
+            {userFeeds.orders.map((item) => (<OrderItemList key={item._id} order={item}/>))}
         </main>
     );
 };

@@ -2,8 +2,7 @@ import {Ingredient} from "../../store/actions/types";
 import styles from './ingredient-details.module.css'
 import {useLocation} from "react-router-dom";
 import {useMemo} from "react";
-import {useSelector} from "react-redux";
-import {IRootState} from "../../store/store";
+import {useSelector} from "../../store/hooks";
 
 interface IIngredientDetailsProps {
     page?: boolean;
@@ -14,7 +13,7 @@ export const IngredientDetails = (props: IIngredientDetailsProps) => {
     const path = location.pathname.split('/');
     const id = path[path.length - 1];
 
-    const constructorElements = useSelector((state: IRootState) => state.constructorElements);
+    const constructorElements = useSelector((state) => state.constructorElements);
     const ingredientInfo = useMemo(()=>(constructorElements.ingredients.filter((elem: Ingredient) => (elem._id === id))[0] || null), [constructorElements])
 
     return (

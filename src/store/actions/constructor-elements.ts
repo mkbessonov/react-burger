@@ -1,8 +1,9 @@
 import {ETypesAction, Ingredient} from "./types";
 import {getIngredients} from "../../service/ingredients-service";
+import {AppDispatch, AppThunk} from "../store";
 
-export const initConstructor = () => {
-    return (dispatch: any) => {
+export const initConstructor: AppThunk = () => {
+    return (dispatch: AppDispatch) => {
         dispatch({
             type: ETypesAction.GET_CONSTRUCTOR_ELEMENTS
         })

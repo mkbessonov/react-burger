@@ -3,10 +3,9 @@ import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-deve
 import React, {useState} from "react";
 import {NavLink, useLocation} from "react-router-dom";
 import {setUser, signOutAction} from "../../store/actions/user";
-import {useDispatch, useSelector} from "react-redux";
-import {IRootState} from "../../store/store";
 import {updateUser} from "../../service/user";
 import {UserOrder} from "../user-order/user-order";
+import {useDispatch, useSelector} from "../../store/hooks";
 
 enum CONTENT {
     PROFILE = 'PROFILE',
@@ -18,7 +17,7 @@ export const Profile = () => {
     const dispatch = useDispatch();
 
     const [currentContent, setCurrentContent] = useState<CONTENT>(location.pathname === '/profile' ? CONTENT.PROFILE : CONTENT.ORDER);
-    const user = useSelector((state: IRootState) => state.user);
+    const user = useSelector((state) => state.user);
     const [form, setValue] = useState({email: user.user?.email || '', name: user.user?.name || '', pass: ''});
     const [oldForm, setOldValue] = useState({email: user.user?.email || '', name: user.user?.name || '', pass: ''});
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

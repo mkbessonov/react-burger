@@ -14,11 +14,11 @@ import React, {useEffect} from "react";
 import {IngredientDetails} from "../ingredient-details/ingredient-details";
 import {PageIngredientsDetails} from "../../pages/page-ingredients-details/page-ingradients-details";
 import {initConstructor} from "../../store/actions/constructor-elements";
-import {useDispatch} from "react-redux";
 import {AllOrders} from "../../pages/all-orders/all-orders";
 import {OrderDetailsModal} from "../order-details-modal/order-details-modal";
 import {useHistory} from "react-router";
 import {PageOrderDetails} from "../../pages/page-order-details-modal/page-order-details-modal";
+import {useDispatch} from "../../store/hooks";
 
 export const Content = () => {
     const location = useLocation();

@@ -1,9 +1,9 @@
-import {ETypesAction} from "../actions/types";
-
+import {ETypesAction, IOrderInfo} from "../actions/types";
+export interface IFeed { orders: IOrderInfo[], total: number, totalToday: number }
 export type TWSState = {
     wsConnected: boolean;
-    feeds: any;
-    userFeeds: any;
+    feeds: IFeed;
+    userFeeds: IFeed;
     error?: Event;
 }
 

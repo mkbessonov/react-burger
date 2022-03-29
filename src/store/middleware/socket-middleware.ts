@@ -1,42 +1,42 @@
 import type {Middleware, MiddlewareAPI} from 'redux';
 import {AppDispatch, IRootState} from "../store";
-import {ETypesAction} from "../actions/types";
+import {TwsActions} from "../actions/types";
 
-export const socketMiddleware = (): Middleware => {
+export const socketMiddleware = (wsActions: TwsActions): Middleware => {
     return ((store: MiddlewareAPI<AppDispatch, IRootState>) => {
         let socket: WebSocket | null = null;
 
         return next => (action) => {
-            const { dispatch } = store;
-            const { type, payload, wsUrl, token } = action;
-            if (type === ETypesAction.WS_CONNECTION_START) {
-                console.log(1)
+            const {dispatch} = store;
+            const {init, sendMessage, onOpen, onClose, onError, onMessage} = wsActions;
+            const {type, payload, wsUrl, token} = action;
+            if (type === init) {
                 socket = token
                     ? new WebSocket(`${wsUrl}?token=${token}`)
                     : new WebSocket(`${wsUrl}`);
             }
             if (socket) {
                 socket.onopen = event => {
-                    dispatch({ type: ETypesAction.WS_CONNECTION_SUCCESS, payload: event });
+                    dispatch({type: onOpen, payload: event});
                 };
 
                 socket.onerror = event => {
-                    dispatch({ type: ETypesAction.WS_CONNECTION_ERROR, payload: event });
+                    dispatch({type: onError, payload: event});
                 };
 
                 socket.onmessage = event => {
-                    const { data } = event;
+                    const {data} = event;
                     const parsedData = JSON.parse(data);
-                    const { success, ...restParsedData } = parsedData;
-                    dispatch({ type: ETypesAction.WS_GET_ALL_FEEDS, payload: restParsedData });
+                    const {success, ...restParsedData} = parsedData;
+                    dispatch({type: onMessage, payload: restParsedData});
                 };
 
                 socket.onclose = event => {
-                    dispatch({ type: ETypesAction.WS_CONNECTION_CLOSED, payload: event });
+                    dispatch({type: onClose, payload: event});
                 };
 
-                if (type === ETypesAction.WS_SEND_MESSAGE) {
-                    const message = token ? { ...payload, token } : { ...payload };
+                if (type === sendMessage) {
+                    const message = token ? {...payload, token} : {...payload};
                     socket.send(JSON.stringify(message));
                 }
             }

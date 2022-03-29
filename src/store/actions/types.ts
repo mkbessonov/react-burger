@@ -25,6 +25,33 @@ export enum ETypesAction {
     WS_SEND_MESSAGE = "WS_SEND_MESSAGE",
 }
 
+export interface TwsActions {
+    init: ETypesAction,
+    sendMessage: ETypesAction,
+    onOpen: ETypesAction,
+    onClose: ETypesAction,
+    onError: ETypesAction,
+    onMessage: ETypesAction
+}
+
+export const wsActions: TwsActions = {
+    init: ETypesAction.WS_CONNECTION_START,
+    sendMessage: ETypesAction.WS_SEND_MESSAGE,
+    onOpen: ETypesAction.WS_CONNECTION_SUCCESS,
+    onClose: ETypesAction.WS_CONNECTION_CLOSED,
+    onError: ETypesAction.WS_CONNECTION_ERROR,
+    onMessage: ETypesAction.WS_GET_ALL_FEEDS
+};
+
+export const wsUserActions: TwsActions = {
+    init: ETypesAction.WS_CONNECTION_START,
+    sendMessage: ETypesAction.WS_SEND_MESSAGE,
+    onOpen: ETypesAction.WS_CONNECTION_SUCCESS,
+    onClose: ETypesAction.WS_CONNECTION_CLOSED,
+    onError: ETypesAction.WS_CONNECTION_ERROR,
+    onMessage: ETypesAction.WS_GET_USER_FEEDS
+};
+
 export interface ConstructorElementsActionType {
     type: ETypesAction,
     ingredients: Ingredient[],
@@ -87,6 +114,7 @@ export interface Order {
     failed: boolean,
     request: boolean
 }
+
 export interface IOrderInfo {
     createdAt: string,
     ingredients: string[],
@@ -96,6 +124,7 @@ export interface IOrderInfo {
     updatedAt: string,
     _id: string,
 }
+
 export interface User {
     email: string,
     name: string
@@ -105,4 +134,9 @@ export interface TWSActions {
     type: ETypesAction
 }
 
-export type TAppActions = OrderDetailsActionType | IngredientsActionType | UserActionType | IngredientInfoActionType | ConstructorElementsActionType;
+export type TAppActions =
+    OrderDetailsActionType
+    | IngredientsActionType
+    | UserActionType
+    | IngredientInfoActionType
+    | ConstructorElementsActionType;
