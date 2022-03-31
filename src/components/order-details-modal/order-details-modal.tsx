@@ -7,11 +7,14 @@ import styles from "./order-details-modal.module.css";
 import {Ingredient, IOrderInfo} from "../../store/actions/types";
 import {IFeed} from "../../store/reducers/ws-reducer";
 import {useSelector} from "../../store/hooks";
+import {useHistory} from "react-router";
 
 export const OrderDetailsModal = () => {
     const location = useLocation();
     const {feeds, userFeeds} = useSelector((state) => state.wsReducer);
     const {ingredients} = useSelector((state) => state.constructorElements);
+
+    const history = useHistory();
 
     const items: IFeed = location.pathname.includes("/profile/orders") ? userFeeds : feeds;
     const orderId: string = useParams<{ id: string }>().id;
@@ -25,40 +28,47 @@ export const OrderDetailsModal = () => {
         const date = moment(currentOrder?.createdAt);
         const newDate: string = date?.format("Z").slice(0, 3);
         return `${date?.fromNow()}, ${date?.format("hh:mm")} i-GMT${newDate?.slice(0, 1)}${+newDate?.slice(1)}`;
-    }, []);
+    }, [currentOrder]);
 
-    const price = useMemo<number>(() => currentOrder.ingredients.reduce((accumulator, currentValue) => {
+    const price = useMemo<number>(() => currentOrder ? currentOrder.ingredients.reduce((accumulator, currentValue) => {
         for (let i = 0; i < ingredients.length; i++) {
             if (currentValue === ingredients[i]._id) {
                 return accumulator + ingredients[i].price;
             }
         }
-    }, 0), []);
-    const currentIngredients = useMemo<Ingredient[]>(() => currentOrder.ingredients.map((currentValue) => {
+    }, 0) : 0, [currentOrder]);
+    const currentIngredients = useMemo<Ingredient[]>(() => currentOrder ? currentOrder.ingredients.map((currentValue) => {
         for (let i = 0; i < ingredients.length; i++) {
             if (currentValue === ingredients[i]._id) {
                 return ingredients[i];
             }
         }
-    }, 0), [ingredients]);
+    }, 0) : [], [ingredients, currentOrder]);
 
     const status = currentOrder?.status === "created" ? "Создан" : currentOrder?.status === "pending" ? "Готовится" : "Выполнен";
     const newIngredients = useMemo<any[]>(() => {
-        const set = new Set(currentOrder.ingredients);
-        const newArr: any[] = [];
-        set.forEach((item) => {
-            let count = 0;
-            let elem = {};
-            currentIngredients.forEach((ingredient: Ingredient) => {
-                if (item === ingredient._id) {
-                    count++;
-                    elem = ingredient;
-                }
-            });
-            newArr.push({count, elem});
-        })
-        return newArr;
+        if (currentOrder) {
+            const set = new Set(currentOrder.ingredients);
+            const newArr: any[] = [];
+            set.forEach((item) => {
+                let count = 0;
+                let elem = {};
+                currentIngredients.forEach((ingredient: Ingredient) => {
+                    if (item === ingredient._id) {
+                        count++;
+                        elem = ingredient;
+                    }
+                });
+                newArr.push({count, elem});
+            })
+            return newArr;
+        }
+        return [];
     }, [currentIngredients, currentOrder]);
+    if (!currentOrder) {
+        history.replace(location.pathname.includes("/profile/orders") ? '/profile/orders' : '/feed');
+        return null;
+    }
     return (
         <>
             <div className={styles.container}>
