@@ -7,7 +7,7 @@
     opacity: 0.5;
 }
 
-.bars-common {
+.bars_common {
     height: 4vw;
     max-height: 100%;
     width: 1vw;
@@ -19,7 +19,7 @@
     bottom: 0;
 }
 
-.bar-one {
+.bar_one {
     left: 0;
     right: 4vw;
     top: 0;
@@ -27,7 +27,7 @@
     box-shadow: 0 0 0 .1vw cyan, 0 0 1vw 0 cyan, inset 0 0 .5vw 0 cyan;
 }
 
-.bar-two {
+.bar_two {
     left: 0;
     right: 0;
     top: 0;
@@ -35,7 +35,7 @@
     box-shadow: 0 0 0 .1vw cyan, 0 0 1vw 0 cyan, inset 0 0 .5vw 0 cyan;
 }
 
-.bar-three {
+.bar_three {
     left: 4vw;
     right: 0;
     top: 0;
@@ -44,7 +44,7 @@
 }
 
 
-.squares-common {
+.squares_common {
     height: 8vw;
     max-height: 100%;
     width: 8vw;
@@ -57,7 +57,7 @@
     border-radius: 0;
 }
 
-.square-one {
+.square_one {
     left: 0;
     right: 0;
     top: 0;
@@ -65,7 +65,7 @@
     box-shadow: 0 0 0 .1vw cyan, 0 0 1vw 0 cyan, inset 0 0 .5vw 0 cyan;
 }
 
-.square-two {
+.square_two {
     left: 0;
     right: 0;
     top: 0;
@@ -73,7 +73,7 @@
     box-shadow: 0 0 0 .1vw cyan, 0 0 1vw 0 cyan, inset 0 0 .5vw 0 cyan;
 }
 
-.bar-one {
+.bar_one {
     animation: barOne 1s .33s ease infinite;
     -moz-animation: barOne 1s .33s ease infinite;
     /* Firefox */
@@ -94,7 +94,7 @@
     }
 }
 
-.bar-two {
+.bar_two {
     animation: barTwo 1s .66s ease infinite;
     -moz-animation: barTwo 1s .66s ease infinite;
     /* Firefox */
@@ -115,7 +115,7 @@
     }
 }
 
-.bar-three {
+.bar_three {
     animation: barThree 1s .99s ease infinite;
     -moz-animation: barThree 1s .99s ease infinite;
     /* Firefox */
@@ -136,7 +136,7 @@
     }
 }
 
-.square-one {
+.square_one {
     animation: squareOne 4s .99s ease infinite;
     -moz-animation: squareOne 4s .99s ease infinite;
     /* Firefox */
@@ -155,7 +155,7 @@
     }
 }
 
-.square-two {
+.square_two {
     animation: squareTwo 4s .99s ease infinite;
     -moz-animation: squareTwo 4s .99s ease infinite;
     /* Firefox */
