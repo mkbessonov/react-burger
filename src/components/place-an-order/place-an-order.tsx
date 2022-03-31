@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import {useMemo, useState} from "react";
 import styles from './place-an-order.module.css'
 import {OrderDetails} from "../order-details/order-details";
-import {Modal} from "../modal/modal";
 import {getOrder} from "../../store/actions/order-details";
 import {Ingredient} from "../../store/actions/types";
 import {useAuth} from "../../service/auth";
@@ -45,9 +44,9 @@ const PlaceAnOrder = (props: IPlaceAnOrderProps) => {
                 <Button type="primary" size="medium" onClick={onClick}>
                     Оформить заказ
                 </Button></>}
-            {open && <Modal width={720} handleClose={() => {
+            {open && <OrderDetails handleClose={() => {
                 setOpen(false)
-            }}><OrderDetails/></Modal>}
+            }}/>}
         </div>
     );
 
