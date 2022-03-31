@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {TWSState} from "../../store/reducers/ws-reducer";
-import {socketClose, socketStart} from "../../store/actions/soket-actions";
+import {socketCloseForAll, socketStartForAll} from "../../store/actions/soket-actions";
 import {OrderItemList} from "../../components/order-item-list/order-item-list";
 import styles from './all-orders.module.css'
 import {OrderInfo} from "../../components/order-info/order-info";
@@ -10,9 +10,9 @@ export const AllOrders = () => {
     const {feeds}: TWSState = useSelector((state) => state.wsReducer);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(socketStart());
+        dispatch(socketStartForAll());
         return () => {
-            dispatch(socketClose());
+            dispatch(socketCloseForAll());
         };
     }, [dispatch]);
     return (

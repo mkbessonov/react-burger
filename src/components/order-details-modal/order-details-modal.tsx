@@ -13,12 +13,12 @@ export const OrderDetailsModal = () => {
     const {feeds, userFeeds} = useSelector((state) => state.wsReducer);
     const {ingredients} = useSelector((state) => state.constructorElements);
 
-    const item: IFeed = location.pathname === "/profile/orders" ? userFeeds : feeds;
+    const items: IFeed = location.pathname.includes("/profile/orders") ? userFeeds : feeds;
     const orderId: string = useParams<{ id: string }>().id;
 
     const currentOrder = useMemo<IOrderInfo>(
-        () => item?.orders.filter((item: IOrderInfo) => item._id === orderId)[0],
-        [orderId, item.orders]
+        () => items?.orders.filter((item: IOrderInfo) => item._id === orderId)[0],
+        [orderId, items.orders]
     );
 
     const date = useMemo<string>(() => {

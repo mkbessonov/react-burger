@@ -20,7 +20,7 @@ declare global {
 const persistConfig = {
     key: 'root',
     storage: LocalStorage,
-    blacklist: ['ingredients', 'user', 'ingredientInfo', 'orderDetails', 'wsReducer']
+    blacklist: ['ingredients', 'user', 'ingredientInfo', 'orderDetails']
 };
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) : compose;
