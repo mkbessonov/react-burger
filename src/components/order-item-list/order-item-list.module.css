@@ -1,0 +1,72 @@
+.ingredient_item {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin-right: -16px;
+    border-radius: 50px;
+    border: 2px solid #4C4CFF;
+    /*border-image-source: linear-gradient(63.18deg, #801AB3 100%, #4C4CFF 100%);*/
+    background: #131316;
+}
+
+.ingredient_item:nth-of-type(1) {
+    z-index: 6;
+}
+
+.ingredient_item:nth-of-type(2) {
+    z-index: 5;
+}
+
+.ingredient_item:nth-of-type(3) {
+    z-index: 4;
+}
+
+.ingredient_item:nth-of-type(4) {
+    z-index: 3;
+}
+
+.ingredient_item:nth-of-type(5) {
+    z-index: 2;
+}
+
+.ingredient_item:nth-of-type(6) {
+    z-index: 1;
+}
+
+.list_item {
+    width: 536px;
+    border-radius: 40px;
+    background-color: #1C1C21;
+    cursor: pointer;
+    margin: 16px 0;
+    padding: 24px;
+}
+
+.img {
+    width: 112px;
+    height: 56px;
+    position: absolute;
+    left: -24px;
+    top: 4px;
+}
+
+.ingredients {
+    display: flex;
+    position: relative;
+}
+
+.counter {
+    margin-left: -25px;
+    margin-top: 20px;
+    z-index: 7;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total {
+    display: flex;
+    align-items: center;
+}

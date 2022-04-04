@@ -1,8 +1,7 @@
 import React, {createContext, ReactNode, useContext} from "react";
-import {useDispatch, useSelector} from "react-redux";
 import {setUser, signInAction} from "../store/actions/user";
-import {IRootState} from "../store/store";
 import {getUser} from "./user";
+import {useDispatch, useSelector} from "../store/hooks";
 
 const AuthContext = createContext<any>(undefined);
 
@@ -16,7 +15,7 @@ export function ProvideAuth(props: IProvideAuthProps) {
 }
 
 export function useProvideAuth() {
-    const user = useSelector((state: IRootState) => state.user);
+    const user = useSelector((state) => state.user);
     const dispatch = useDispatch()
     const getAndSetUser = () => {
         return getUser().then((res) => {

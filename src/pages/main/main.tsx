@@ -3,15 +3,14 @@ import BurgerConstructor from "../../components/burger-constructor/burger-constr
 import styles from './main.module.css'
 import PlaceAnOrder from "../../components/place-an-order/place-an-order";
 import {useDrop} from "react-dnd";
-import {useDispatch, useSelector} from "react-redux";
 import {addIngredient, setIngredient} from "../../store/actions/ingredients";
 import {ETypesIngredient, Ingredient} from "../../store/actions/types";
-import {IRootState} from "../../store/store";
 import {decrement, increment} from "../../store/actions/constructor-elements";
+import {useDispatch, useSelector} from "../../store/hooks";
 
 export const Main = () => {
     const dispatch = useDispatch();
-    const ingredients = useSelector((state: IRootState) => state.ingredients);
+    const ingredients = useSelector((state) => state.ingredients);
     const [{isOver, canDrop}, drop] = useDrop({
         accept: "ingredients",
         collect: (monitor) => ({

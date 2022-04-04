@@ -2,8 +2,8 @@ import {Ingredient} from "../../store/actions/types";
 import styles from './ingredient-details.module.css'
 import {useLocation} from "react-router-dom";
 import {useMemo} from "react";
-import {useSelector} from "react-redux";
-import {IRootState} from "../../store/store";
+import {useSelector} from "../../store/hooks";
+import {useHistory} from "react-router";
 
 interface IIngredientDetailsProps {
     page?: boolean;
@@ -13,10 +13,14 @@ export const IngredientDetails = (props: IIngredientDetailsProps) => {
     const location = useLocation();
     const path = location.pathname.split('/');
     const id = path[path.length - 1];
+    const history = useHistory();
 
-    const constructorElements = useSelector((state: IRootState) => state.constructorElements);
-    const ingredientInfo = useMemo(()=>(constructorElements.ingredients.filter((elem: Ingredient) => (elem._id === id))[0] || null), [constructorElements])
-
+    const constructorElements = useSelector((state) => state.constructorElements);
+    const ingredientInfo = useMemo(() => (constructorElements.ingredients.filter((elem: Ingredient) => (elem._id === id))[0] || null), [constructorElements])
+    if (!ingredientInfo) {
+        history.replace('/ingredients');
+        return null;
+    }
     return (
         <div className={styles.ingredient_content}>
             <div className="text text_type_main-large"

@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import {useMemo, useState} from "react";
 import styles from './place-an-order.module.css'
 import {OrderDetails} from "../order-details/order-details";
-import {Modal} from "../modal/modal";
 import {getOrder} from "../../store/actions/order-details";
 import {Ingredient} from "../../store/actions/types";
 import {useAuth} from "../../service/auth";
@@ -26,31 +25,31 @@ const PlaceAnOrder = (props: IPlaceAnOrderProps) => {
         });
         return newSum
     }, [ingredients]);
-    const onClick = () =>{
-        if (auth.user.user){
+    const onClick = () => {
+        if (auth.user.user) {
             getOrder(ingredients.map(elem => elem._id));
             setOpen(true);
         } else {
             history.replace('/login');
         }
     };
-    if (ingredients.length > 0) {
-        return (
-            <div className={styles.footer}>
+
+    return (
+        <div className={styles.footer}>
+            {ingredients.length > 0 && <>
                 <div className={styles.sum}>
                     <p className="text text_type_digits-medium">{sum}</p>
                     <CurrencyIcon type="primary"/>
                 </div>
                 <Button type="primary" size="medium" onClick={onClick}>
                     Оформить заказ
-                </Button>
-                {open && <Modal width={720} handleClose={() => {
-                    setOpen(false)
-                }}><OrderDetails/></Modal>}
-            </div>
-        );
-    }
-    return null;
+                </Button></>}
+            {open && <OrderDetails handleClose={() => {
+                setOpen(false)
+            }}/>}
+        </div>
+    );
+
 };
 
 const mapStateToProps = (state: IPlaceAnOrderProps) => ({

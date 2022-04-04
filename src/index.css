@@ -19,3 +19,7 @@
     flex-direction: column;
     height: 100vh;
 }
+#modal{
+    position: relative;
+    z-index: 1000000;
+}

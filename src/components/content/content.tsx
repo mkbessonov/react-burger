@@ -14,16 +14,23 @@ import React, {useEffect} from "react";
 import {IngredientDetails} from "../ingredient-details/ingredient-details";
 import {PageIngredientsDetails} from "../../pages/page-ingredients-details/page-ingradients-details";
 import {initConstructor} from "../../store/actions/constructor-elements";
-import {useDispatch} from "react-redux";
+import {AllOrders} from "../../pages/all-orders/all-orders";
+import {OrderDetailsModal} from "../order-details-modal/order-details-modal";
+import {useHistory} from "react-router";
+import {PageOrderDetails} from "../../pages/page-order-details-modal/page-order-details-modal";
+import {useDispatch} from "../../store/hooks";
 
 export const Content = () => {
     const location = useLocation();
     const background = location.state && (location.state as any).background;
     const dispatch = useDispatch()
-
+    const history = useHistory();
     useEffect(() => {
         dispatch(initConstructor())
     }, [dispatch]);
+    const handleCloseForOrderModal = () => {
+        history.replace({pathname: location.pathname.includes("/profile/orders") ? '/profile/orders/' : '/feed/'});
+    };
     return (
         <>
             <Switch location={background || location}>
@@ -31,10 +38,14 @@ export const Content = () => {
                 <NotAuthRote path='/login'><Login/></NotAuthRote>
                 <NotAuthRote path='/forgot-password'><ForgotPassword/></NotAuthRote>
                 <NotAuthRote path='/reset-password'><ResetPassword/></NotAuthRote>
+                <Route path={["/feed/:id", "/profile/orders/:id"]} children={
+                    <PageOrderDetails/>
+                }/>
                 <ProtectedRoute path='/profile'><Profile/></ProtectedRoute>
                 <Route path="/ingredients/:id" children={
                     <PageIngredientsDetails/>
                 }/>
+                <Route path='/feed'><AllOrders/></Route>
                 <Route path={"/ingredients"} exact={true}>
                     <DndProvider backend={HTML5Backend}>
                         <Main/>
@@ -47,6 +58,11 @@ export const Content = () => {
             {background && <Route path="/ingredients/:id" children={
                 <Modal width={720}>
                     <IngredientDetails/>
+                </Modal>
+            }/>}
+            {background && <Route path={["/feed/:id", "/profile/orders/:id"]} children={
+                <Modal width={720} handleClose={handleCloseForOrderModal}>
+                    <OrderDetailsModal/>
                 </Modal>
             }/>}
         </>

@@ -1,0 +1,34 @@
+.main {
+    color: #F2F2F3;
+    width: 586px;
+}
+
+.order_container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.total {
+    text-shadow: 0 4px 32px rgba(51, 51, 255, .5), 0 0 8px rgba(51, 51, 255, .25), 0 0 16px rgba(51, 51, 255, .25);
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    width: 272px;
+}
+
+.done_number {
+    color: #00CCCC;
+}
+
+.orders {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 321px;
+    max-width: 270px;
+    overflow-x: hidden;
+}
+

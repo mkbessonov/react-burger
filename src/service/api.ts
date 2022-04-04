@@ -1,6 +1,7 @@
 import axios from "axios";
 import {getCookie, setCookie} from "../utils";
-
+export const WS_URL: string = "wss://norma.nomoreparties.space/orders/all";
+export const WS_USER_URL: string = "wss://norma.nomoreparties.space/orders";
 const URL = 'https://norma.nomoreparties.space/api/';
 let instance = axios.create({
     baseURL: URL

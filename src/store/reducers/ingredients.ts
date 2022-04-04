@@ -19,6 +19,9 @@ export const ingredients = (state: Ingredient[] = [], action: IngredientsActionT
             action.index  !== undefined && action.newIndex !== undefined && state.splice(action.index, 0, state.splice(action.newIndex, 1)[0]);
             return [...state];
         }
+        case ETypesAction.ClEAR_BURGER:{
+            return [];
+        }
         default:
             return state;
     }

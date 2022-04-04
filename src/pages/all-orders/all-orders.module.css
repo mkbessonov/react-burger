@@ -1,0 +1,19 @@
+.left_container {
+    float: left;
+    width: 600px;
+}
+
+.right_container{
+    margin-left: 60px;
+}
+
+.main {
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.list {
+    max-height: calc(70vh + 96px);
+    overflow: auto;
+}
