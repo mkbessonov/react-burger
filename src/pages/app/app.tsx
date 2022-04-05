@@ -13,7 +13,7 @@ function App() {
         <PersistGate loading={null} persistor={persistor}>
             <Provider store={store}>
                 <ProvideAuth>
-                    <BrowserRouter>
+                    <BrowserRouter basename={'/react-burger'}>
                         <AppHeader/>
                         <Content/>
                     </BrowserRouter>
