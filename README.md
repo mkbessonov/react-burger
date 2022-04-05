@@ -19,4 +19,4 @@
 Запуск 6 тестов (cypress)
 
 
-#[GitHub Pages](https://mkbessonov.github.io/react-burger/)
+#[Ссылка на готовый проект](https://mkbessonov.github.io/react-burger/)
