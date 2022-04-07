@@ -61,7 +61,7 @@ export const wsUserActions: TwsActions = {
 
 export interface ConstructorElementsActionType {
     type: ETypesAction,
-    ingredients: Ingredient[],
+    ingredients?: Ingredient[],
     id?: string
 }
 
@@ -108,7 +108,12 @@ export interface IngredientsActionType {
 
 export interface OrderDetailsActionType {
     type: ETypesAction,
-    order: Order
+    order: {
+        name: string,
+        order: {
+            number: number
+        }
+    }
 }
 
 export interface Order {
